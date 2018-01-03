@@ -44,6 +44,15 @@ while True:
 		movi = web.get_data_yahoo('MOVI3.SA', start, end)
 		abev = web.get_data_yahoo('ABEV3.SA', start, end)
 
+		# Cleaning datasets from possible NaN values
+		qgep.fillna(method='ffill', inplace=True)
+		pomo.fillna(method='ffill', inplace=True)
+		wege.fillna(method='ffill', inplace=True)
+		movi.fillna(method='ffill', inplace=True)
+		abev.fillna(method='ffill', inplace=True)
+
+		print(qgep)
+
 		qgep_current_rate = qgep.iloc[-1]['Close']
 		pomo_current_rate = pomo.iloc[-1]['Close']
 		wege_current_rate = wege.iloc[-1]['Close']
