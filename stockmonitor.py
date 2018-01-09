@@ -23,9 +23,10 @@ abev_stock = 50
 investment_value = 7300.00
 remaining_balance = 154.22
 
-start = date.today() - timedelta(days=7)
+start = date.today() - timedelta(days=15)
 end = date.today()
 
+historical = []
 
 def calc_change(previous_close, current_rate):
 	change = current_rate - previous_close
@@ -50,8 +51,6 @@ while True:
 		wege.fillna(method='ffill', inplace=True)
 		movi.fillna(method='ffill', inplace=True)
 		abev.fillna(method='ffill', inplace=True)
-
-		print(qgep)
 
 		qgep_current_rate = qgep.iloc[-1]['Close']
 		pomo_current_rate = pomo.iloc[-1]['Close']
@@ -88,6 +87,7 @@ while True:
 		print('SHARES TOTAL : ' + format_value(current_shares_value))
 
 		print('ACCOUNT TOTAL : ' + 	format_value(current_account_value) + ' ' + format_value(current_yield_value) + ' (' + format_value(current_yield_percentage) + '%)')
+		variacao_dia.append(current_account_value)
 
 		plt.clf()
 		plt.subplot(235)
@@ -111,6 +111,11 @@ while True:
 		plt.title('WEGE3 : ' + format_value(wege_current_rate) + ' ' + format_value(wege_change) + ' (' + format_value(wege_change_percentage) + '%)' )
 		wege['Close'].plot()
 
+		hist_series = pd.Series(historical)
+		plt.subplot(236)
+		plt.title('No dia : ' + format_value(current_account_value) + ' ' + format_value(current_yield_value) + ' (' + format_value(current_yield_percentage) + '%)' )
+		hist_series.plot()		
+		
 		plt.pause(0.05)
 		#time.sleep(0.1)
 		
