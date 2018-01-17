@@ -6,26 +6,33 @@ import pandas_datareader.data as web
 import time
 import numpy as np
 
-
 # Some initial configurations
 plt.style.use('dark_background')
 plt.figure().subplots_adjust(hspace=0.5)
 plt.ion()
 mng = plt.get_current_fig_manager()
-#mng.full_screen_toggle()
+mng.full_screen_toggle()
 
-qgep_stock = 100
-pomo_stock = 100
-wege_stock = 100
-movi_stock = 300
 abev_stock = 50
+movi_stock = 300
+pomo_stock = 100
+qgep_stock = 100
+wege_stock = 100
+
+abev_buy_average = (980.00) / 50
+movi_buy_average = (848.00 + 2198.00) / 300
+pomo_buy_average = (401.00) / 100
+qgep_buy_average = (1086.00) / 100
+wege_buy_average = (1989.00) / 100
 
 investment_value = 7300.00
 remaining_balance = 154.22
 
-start = date.today() - timedelta(days=15)
+days = 30
+start = date.today() - timedelta(days=days)
 end = date.today()
 
+intraday = []
 historical = []
 
 def calc_change(previous_close, current_rate):
@@ -39,18 +46,45 @@ def format_value(value):
 while True:
 
 	try:
-		qgep = web.get_data_yahoo('QGEP3.SA', start, end)
-		pomo = web.get_data_yahoo('POMO4.SA', start, end)
-		wege = web.get_data_yahoo('WEGE3.SA', start, end)
-		movi = web.get_data_yahoo('MOVI3.SA', start, end)
+		print("Pulling ABEV3")
 		abev = web.get_data_yahoo('ABEV3.SA', start, end)
+		print("Pulling MOVI3")
+		movi = web.get_data_yahoo('MOVI3.SA', start, end)
+		print("Pulling POMO4")
+		pomo = web.get_data_yahoo('POMO4.SA', start, end)
+		print("Pulling QGEP3")
+		qgep = web.get_data_yahoo('QGEP3.SA', start, end)
+		print("Pulling WEGE3")
+		wege = web.get_data_yahoo('WEGE3.SA', start, end)
+
+		abev['Diff'] = abev['Close'].diff()
+		movi['Diff'] = movi['Close'].diff()
+		pomo['Diff'] = pomo['Close'].diff()
+		qgep['Diff'] = qgep['Close'].diff()
+		wege['Diff'] = wege['Close'].diff()
+
+		abev['Total'] = abev['Close'] * abev_stock
+		movi['Total'] = movi['Close'] * movi_stock
+		pomo['Total'] = pomo['Close'] * pomo_stock
+		qgep['Total'] = qgep['Close'] * qgep_stock
+		wege['Total'] = wege['Close'] * wege_stock
+
+		historical = abev['Total'] + movi['Total'] + pomo['Total'] + qgep['Total'] + wege['Total']
+		
+		'''
+		abev['Diff'] = pd.Series(abev['Close'] - abev_buy_average, index=abev.index)
+		movi['Diff'] = pd.Series(movi['Close'] - movi_buy_average, index=movi.index)
+		pomo['Diff'] = pd.Series(pomo['Close'] - pomo_buy_average, index=pomo.index)
+		qgep['Diff'] = pd.Series(qgep['Close'] - qgep_buy_average, index=qgep.index)
+		wege['Diff'] = pd.Series(wege['Close'] - wege_buy_average, index=wege.index)
+		'''
 
 		# Cleaning datasets from possible NaN values
-		qgep.fillna(method='ffill', inplace=True)
-		pomo.fillna(method='ffill', inplace=True)
-		wege.fillna(method='ffill', inplace=True)
-		movi.fillna(method='ffill', inplace=True)
 		abev.fillna(method='ffill', inplace=True)
+		movi.fillna(method='ffill', inplace=True)
+		pomo.fillna(method='ffill', inplace=True)
+		qgep.fillna(method='ffill', inplace=True)
+		wege.fillna(method='ffill', inplace=True)
 
 		qgep_current_rate = qgep.iloc[-1]['Close']
 		pomo_current_rate = pomo.iloc[-1]['Close']
@@ -87,38 +121,70 @@ while True:
 		print('SHARES TOTAL : ' + format_value(current_shares_value))
 
 		print('ACCOUNT TOTAL : ' + 	format_value(current_account_value) + ' ' + format_value(current_yield_value) + ' (' + format_value(current_yield_percentage) + '%)')
-		variacao_dia.append(current_account_value)
+		intraday.append(current_account_value)
 
 		plt.clf()
-		plt.subplot(235)
+
+		# Row 1 - Close prices
+		plt.subplot2grid((3, 5), (0, 0), rowspan=1, colspan=1)
 		plt.title('ABEV3 : ' + format_value(abev_current_rate) + ' ' + format_value(abev_change) + ' (' + format_value(abev_change_percentage) + '%)' )
-		abev['Close'].plot()
+		abev['Close'].plot(color='cyan')
 
-		plt.subplot(234)
+		plt.subplot2grid((3, 5), (0, 1), rowspan=1, colspan=1)
 		plt.title('MOVI3 : ' + format_value(movi_current_rate) + ' ' + format_value(movi_change) + ' (' + format_value(movi_change_percentage) + '%)' )
+		movi['Close'].plot(color='cyan')
 
-		movi['Close'].plot()
-
-		plt.subplot(232)
+		plt.subplot2grid((3, 5), (0, 2), rowspan=1, colspan=1)
 		plt.title('POMO4 : ' + format_value(pomo_current_rate) + ' ' + format_value(pomo_change) + ' (' + format_value(pomo_change_percentage) + '%)' )
-		pomo['Close'].plot()
+		pomo['Close'].plot(color='cyan')
 
-		plt.subplot(231)
+		plt.subplot2grid((3, 5), (0, 3), rowspan=1, colspan=1)
 		plt.title('QGEP3 : ' + format_value(qgep_current_rate) + ' ' + format_value(qgep_change) + ' (' + format_value(qgep_change_percentage) + '%)' )
-		qgep['Close'].plot()
+		qgep['Close'].plot(color='cyan')
 
-		plt.subplot(233)
+		plt.subplot2grid((3, 5), (0, 4), rowspan=1, colspan=1)
 		plt.title('WEGE3 : ' + format_value(wege_current_rate) + ' ' + format_value(wege_change) + ' (' + format_value(wege_change_percentage) + '%)' )
-		wege['Close'].plot()
+		wege['Close'].plot(color='cyan')
 
+		# Row 2 - Diff
+		plt.subplot2grid((3, 5), (1, 0), rowspan=1, colspan=1)
+		plt.tick_params(
+		    axis='x',          # changes apply to the x-axis
+		    which='both',      # both major and minor ticks are affected
+		    bottom='off',      # ticks along the bottom edge are off
+		    top='off',         # ticks along the top edge are off
+		    labelbottom='off') # labels along the bottom edge are off
+		abev['Diff'].plot(kind='bar', color='cyan')
+
+		plt.subplot2grid((3, 5), (1, 1), rowspan=1, colspan=1)
+		plt.tick_params(axis='x', which='both', bottom='off', top='off', labelbottom='off')
+		movi['Diff'].plot(kind='bar', color='cyan')
+
+		plt.subplot2grid((3, 5), (1, 2), rowspan=1, colspan=1)
+		plt.tick_params(axis='x', which='both', bottom='off', top='off', labelbottom='off')
+		pomo['Diff'].plot(kind='bar', color='cyan')
+
+		plt.subplot2grid((3, 5), (1, 3), rowspan=1, colspan=1)
+		plt.tick_params(axis='x', which='both', bottom='off', top='off', labelbottom='off')
+		qgep['Diff'].plot(kind='bar', color='cyan')
+
+		plt.subplot2grid((3, 5), (1, 4), rowspan=1, colspan=1)
+		plt.tick_params(axis='x', which='both', bottom='off', top='off', labelbottom='off')
+		wege['Diff'].plot(kind='bar', color='cyan')
+ 
+		# Row 3 - Historical and Intraday
 		hist_series = pd.Series(historical)
-		plt.subplot(236)
+		plt.subplot2grid((3, 5), (2, 0), rowspan=1, colspan=2)
 		plt.title('No dia : ' + format_value(current_account_value) + ' ' + format_value(current_yield_value) + ' (' + format_value(current_yield_percentage) + '%)' )
-		hist_series.plot()		
+		hist_series.plot(color='cyan')		
+
+		intraday_series = pd.Series(intraday)
+		plt.subplot2grid((3, 5), (2, 2), rowspan=1, colspan=3)
+		intraday_series.plot(color='cyan')
 		
 		plt.pause(0.05)
 		#time.sleep(0.1)
 		
 	except Exception as e:
-		print("Failed to pull data from source.")
+		print(e)
 	
