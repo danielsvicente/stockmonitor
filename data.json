@@ -1,0 +1,76 @@
+{
+	"stock_shares": [
+		{
+			"company": "Ambev",
+			"ticker": "ABEV3",
+			"yahoo_id": "ABEV3.SA",
+			"transactions": [
+				{
+					"type": "",
+					"quantity": "",
+					"price": "",
+					"date": ""
+				}
+			]
+		},
+		{
+			"company": "Movida",
+                        "ticker": "MOVI3",
+                        "yahoo_id": "MOVI3.SA",
+                        "transactions": [
+                                {
+                                        "type": "",
+					"quantity": "",
+                                        "price": "",
+                                        "date": ""
+                                }
+                        ]
+                },
+		{
+                        "company": "Marcopolo",
+                        "ticker": "POMO3",
+                        "yahoo_id": "POMO3.SA",
+                        "transactions": [
+                                {
+                                        "type": "",
+					"quantity": "",
+                                        "price": "",
+                                        "date": ""
+                                }
+                        ]
+                },
+		{
+                        "company": "Gerdau",
+                        "ticker": "GOAU4",
+                        "yahoo_id": "GOAU4.SA",
+                        "transactions": [
+                                {
+                                        "type": "",
+					"quantity": "",
+                                        "price": "",
+                                        "date": ""
+                                }
+                        ]
+                },
+		{
+                        "company": "Weg",
+                        "ticker": "WEGE3",
+                        "yahoo_id": "WEGE3.SA",
+                        "transactions": [
+                                {
+                                        "type": "",
+					"quantity": "",
+                                        "price": "",
+                                        "date": ""
+                                }
+                        ]
+                }
+	],
+	"total_deposited": "7300.00",
+	"available_to_invest": "373.01"
+}
+
+
+
+
+
