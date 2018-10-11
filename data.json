@@ -1,76 +1,47 @@
 {
-	"stock_shares": [
+	"total_deposited": "7300.00",
+	"available_to_invest": "373.01",
+	"transactions":[
 		{
-			"company": "Ambev",
-			"ticker": "ABEV3",
-			"yahoo_id": "ABEV3.SA",
-			"transactions": [
-				{
-					"type": "",
-					"quantity": "",
-					"price": "",
-					"date": ""
-				}
+			"date": "03.04.2017",
+			"total": "-858.27",
+			"trades": [
+				{"type": "BUY", "ticker": "MOVI3", "yahoo_id": "MOVI3.SA", "quantity": "100", "price": "8.48"}
 			]
 		},
 		{
-			"company": "Movida",
-                        "ticker": "MOVI3",
-                        "yahoo_id": "MOVI3.SA",
-                        "transactions": [
-                                {
-                                        "type": "",
-					"quantity": "",
-                                        "price": "",
-                                        "date": ""
-                                }
-                        ]
-                },
+			"date": "15.05.2017",
+            "total": "-6364.04",
+            "trades": [
+            	{"type": "BUY", "ticker": "ABEV3", "yahoo_id": "ABEV3.SA", "quantity": "50", "price": "19.60"},
+				{"type": "BUY", "ticker": "MOVI3", "yahoo_id": "MOVI3.SA", "quantity": "200", "price": "10.99"},
+				{"type": "BUY", "ticker": "PTBL3", "yahoo_id": "PTBL3.SA", "quantity": "300", "price": "3.85"},
+				{"type": "BUY", "ticker": "WEGE3", "yahoo_id": "WEGE3.SA", "quantity": "100", "price": "19.89"}
+			]
+        },
 		{
-                        "company": "Marcopolo",
-                        "ticker": "POMO3",
-                        "yahoo_id": "POMO3.SA",
-                        "transactions": [
-                                {
-                                        "type": "",
-					"quantity": "",
-                                        "price": "",
-                                        "date": ""
-                                }
-                        ]
-                },
+			"date": "21.12.2017",
+			"total": "1534.51",
+			"trades": [
+				{"type": "SELL", "ticker": "PTBL3", "yahoo_id": "PTBL3.SA", "quantity": "300", "price": "5.15"}
+			]
+		},
 		{
-                        "company": "Gerdau",
-                        "ticker": "GOAU4",
-                        "yahoo_id": "GOAU4.SA",
-                        "transactions": [
-                                {
-                                        "type": "",
-					"quantity": "",
-                                        "price": "",
-                                        "date": ""
-                                }
-                        ]
-                },
+			"date": "26.12.2017",
+			"total": "-1507.47",
+			"trades": [
+				{"type": "BUY", "ticker": "POMO4", "yahoo_id": "POMO4.SA", "quantity": "100", "price": "4.01"},
+				{"type": "BUY", "ticker": "QGEP3", "yahoo_id": "QGEP3.SA", "quantity": "100", "price": "10.86"}
+			]
+		},
 		{
-                        "company": "Weg",
-                        "ticker": "WEGE3",
-                        "yahoo_id": "WEGE3.SA",
-                        "transactions": [
-                                {
-                                        "type": "",
-					"quantity": "",
-                                        "price": "",
-                                        "date": ""
-                                }
-                        ]
-                }
+			"date": "21.02.2018",
+			"total": "130.45",
+			"trades": [
+				{"type": "BUY", "ticker": "GOAU4", "yahoo_id": "GOAU4.SA", "quantity": "100", "price": "7.93"},
+				{"type": "SELL", "ticker": "QGEP3", "yahoo_id": "QGEP3.SA", "quantity": "100", "price": "9.44"}
+			]
+		}
 	],
-	"total_deposited": "7300.00",
-	"available_to_invest": "373.01"
+	"earnings": []
 }
-
-
-
-
-

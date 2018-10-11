@@ -5,13 +5,47 @@ import pandas as pd
 import pandas_datareader.data as web
 import time
 import numpy as np
+import json
 
-# Some initial configurations
+
+# Some initial configurations for the gui
 plt.style.use('dark_background')
 plt.figure().subplots_adjust(hspace=0.5)
 plt.ion()
 mng = plt.get_current_fig_manager()
 #mng.full_screen_toggle()
+
+
+# Access data from json file
+with open("data.json", "r") as data_file:
+    data = json.load(data_file)
+
+# Process data
+total_deposited = data["total_deposited"]
+available_to_invest = data["available_to_invest"]
+transactions = data["transactions"]
+earings = data["earnings"]
+stocks = []
+# Fill list of stocks
+for transaction in transactions:
+    for trade in transaction['trades']:
+        new_stock = True
+        for stock in stocks:
+            print(stock['ticker'], trade['ticker'])
+            if stock['ticker'] == trade['ticker']:
+                if trade['type'] == 'BUY':
+                    stock['quantity'] = stock['quantity'] + int(trade['quantity'])
+                    stock['total_invested'] = stock['total_invested'] + (int(trade['quantity']) * float(trade['price']))
+                else:
+                    stock['quantity'] = stock['quantity'] - int(trade['quantity'])
+                    stock['total_invested'] = stock['total_invested'] - (int(trade['quantity']) * float(trade['price']))
+                if stock['quantity'] > 0:
+                    stock['average_price'] = stock['total_invested'] / stock['quantity']
+                new_stock = False
+        if new_stock is True:
+            ti = int(trade['quantity']) * float(trade['price'])
+            stocks.append(dict(ticker=trade['ticker'], quantity=int(trade['quantity']), average_price=float(trade['price']), total_invested=ti))
+
 
 abev_stock = 50
 movi_stock = 300
@@ -25,8 +59,8 @@ pomo_buy_average = (401.00) / 100
 goau_buy_average = (975.00) / 100
 wege_buy_average = (1989.00) / 100
 
-investment_value = 7300.00
-remaining_balance = 373.01
+investment_value = float(total_deposited)
+remaining_balance = float(available_to_invest)
 
 days = 30
 start = date.today() - timedelta(days=days)
@@ -193,4 +227,5 @@ while True:
 		
 	except Exception as e:
 		print(e)
-	
+
+
