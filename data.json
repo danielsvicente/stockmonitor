@@ -1,46 +1,53 @@
 {
-	"total_deposited": "7300.00",
-	"available_to_invest": "373.01",
+	"total_deposited": 7300.00,
+	"available_to_invest": 381.41,
 	"transactions":[
 		{
 			"date": "03.04.2017",
-			"total": "-858.27",
+			"total": -858.27,
 			"trades": [
-				{"type": "BUY", "ticker": "MOVI3", "yahoo_id": "MOVI3.SA", "quantity": "100", "price": "8.48"}
+				{"type": "BUY", "ticker": "MOVI3", "yahoo_id": "MOVI3.SA", "quantity": 100, "price": 8.48}
 			]
 		},
 		{
 			"date": "15.05.2017",
-            "total": "-6364.04",
-            "trades": [
-            	{"type": "BUY", "ticker": "ABEV3", "yahoo_id": "ABEV3.SA", "quantity": "50", "price": "19.60"},
-				{"type": "BUY", "ticker": "MOVI3", "yahoo_id": "MOVI3.SA", "quantity": "200", "price": "10.99"},
-				{"type": "BUY", "ticker": "PTBL3", "yahoo_id": "PTBL3.SA", "quantity": "300", "price": "3.85"},
-				{"type": "BUY", "ticker": "WEGE3", "yahoo_id": "WEGE3.SA", "quantity": "100", "price": "19.89"}
+			"total": -6364.04,
+			"trades": [
+				{"type": "BUY", "ticker": "ABEV3", "yahoo_id": "ABEV3.SA", "quantity": 50, "price": 19.60},
+				{"type": "BUY", "ticker": "MOVI3", "yahoo_id": "MOVI3.SA", "quantity": 200, "price": 10.99},
+				{"type": "BUY", "ticker": "PTBL3", "yahoo_id": "PTBL3.SA", "quantity": 300, "price": 3.85},
+				{"type": "BUY", "ticker": "WEGE3", "yahoo_id": "WEGE3.SA", "quantity": 100, "price": 19.89}
 			]
-        },
+		},
 		{
 			"date": "21.12.2017",
-			"total": "1534.51",
+			"total": 1534.51,
 			"trades": [
-				{"type": "SELL", "ticker": "PTBL3", "yahoo_id": "PTBL3.SA", "quantity": "300", "price": "5.15"}
+				{"type": "SELL", "ticker": "PTBL3", "yahoo_id": "PTBL3.SA", "quantity": 300, "price": 5.15}
 			]
 		},
 		{
 			"date": "26.12.2017",
-			"total": "-1507.47",
+			"total": -1507.47,
 			"trades": [
-				{"type": "BUY", "ticker": "POMO4", "yahoo_id": "POMO4.SA", "quantity": "100", "price": "4.01"},
-				{"type": "BUY", "ticker": "QGEP3", "yahoo_id": "QGEP3.SA", "quantity": "100", "price": "10.86"}
+				{"type": "BUY", "ticker": "POMO4", "yahoo_id": "POMO4.SA", "quantity": 100, "price": 4.01},
+				{"type": "BUY", "ticker": "QGEP3", "yahoo_id": "QGEP3.SA", "quantity": 100, "price": 10.86}
 			]
 		},
 		{
 			"date": "21.02.2018",
-			"total": "130.45",
+			"total": 130.45,
 			"trades": [
-				{"type": "BUY", "ticker": "GOAU4", "yahoo_id": "GOAU4.SA", "quantity": "100", "price": "7.93"},
-				{"type": "SELL", "ticker": "QGEP3", "yahoo_id": "QGEP3.SA", "quantity": "100", "price": "9.44"}
+				{"type": "BUY", "ticker": "GOAU4", "yahoo_id": "GOAU4.SA", "quantity": 100, "price": 7.93},
+				{"type": "SELL", "ticker": "QGEP3", "yahoo_id": "QGEP3.SA", "quantity": 100, "price": 9.44}
 			]
+		},
+		{
+			"date": null,
+			"total": 0.00,
+			"trades": [
+				{"type": "ADJUST", "ticker": "WEGE3", "yahoo_id": "WEGE3.SA", "quantity": 30}
+			]	
 		}
 	],
 	"earnings": []
