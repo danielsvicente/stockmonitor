@@ -63,6 +63,14 @@ def calc_change(previous_close, current_rate):
 def format_value(value):
 	return "{:.2f}".format(value)
 
+def get_color(value):
+    if value > 0.0:
+        return 'limegreen'
+    elif value < 0.0:
+        return 'red'
+    else:
+        return 'grey'
+
 while True:
 
 	try:
@@ -104,7 +112,7 @@ while True:
 				# Row 1 - Close prices
 				plt.subplot2grid((3, 5), (0, plot_column), rowspan=1, colspan=1)
 				plt.title(stock["ticker"] + ': ' + format_value(online_data_current_rate) + ' ' + format_value(online_data_change) + ' (' + format_value(online_data_change_percentage) + '%)' )
-				online_data['Close'].plot(color='cyan')
+				online_data['Close'].plot(color=get_color(online_data_change))
 
 				# Row 2 - Diff
 				plt.subplot2grid((3, 5), (1, plot_column), rowspan=1, colspan=1)
@@ -114,11 +122,9 @@ while True:
 				    bottom='off',      # ticks along the bottom edge are off
 				    top='off',         # ticks along the top edge are off
 				    labelbottom='off') # labels along the bottom edge are off
-				online_data['Diff'].plot(kind='bar', color='cyan')
+				online_data['Diff'].plot(kind='bar', color=get_color(online_data_change))
 
 				plot_column = plot_column + 1
-
-		plt.pause(0.05)
 
 		current_account_value = current_shares_value + available_to_invest
 		current_yield_value = current_account_value - total_deposited
@@ -133,13 +139,13 @@ while True:
 		# Row 3 - Historical and Intraday
 		plt.subplot2grid((3, 5), (2, 0), rowspan=1, colspan=2)
 		plt.title('Total : ' + format_value(current_account_value) + ' ' + format_value(current_yield_value) + ' (' + format_value(current_yield_percentage) + '%)' )
-		historical.plot(color='cyan')		
+		historical.plot(color=get_color(current_yield_value))		
 
 		intraday.append(current_account_value)
 		intraday_series = pd.Series(intraday)
 		plt.subplot2grid((3, 5), (2, 2), rowspan=1, colspan=3)
 		plt.title('No dia : ' + format_value(current_day_yield_value) + ' (' + format_value(current_day_yield_percentage) + '%)' )
-		intraday_series.plot(color='cyan')
+		intraday_series.plot(color=get_color(current_day_yield_value))
 		
 		plt.pause(0.05)
 		#time.sleep(0.1)
