@@ -6,7 +6,7 @@ import pandas_datareader.data as web
 import time
 import numpy as np
 import json
-
+import os 
 
 # Some initial configurations for the gui
 plt.style.use('dark_background')
@@ -17,7 +17,9 @@ mng = plt.get_current_fig_manager()
 
 
 # Access data from json file
-with open("data.json", "r") as data_file:
+parent_path = os.path.dirname(__file__)
+datafile_path = os.path.join(parent_path, "data.json")
+with open(datafile_path, "r") as data_file:
     data = json.load(data_file)
 
 # Process data
