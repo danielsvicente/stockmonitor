@@ -6,7 +6,7 @@ import pandas_datareader.data as web
 import time
 import numpy as np
 import json
-
+import os 
 
 # Some initial configurations for the gui
 plt.style.use('dark_background')
@@ -17,7 +17,9 @@ mng = plt.get_current_fig_manager()
 
 
 # Access data from json file
-with open("data.json", "r") as data_file:
+parent_path = os.path.dirname(__file__)
+datafile_path = os.path.join(parent_path, "data.json")
+with open(datafile_path, "r") as data_file:
     data = json.load(data_file)
 
 # Process data
@@ -49,7 +51,7 @@ for transaction in transactions:
 
 print(json.dumps(stocks, indent=4))
 
-days = 30
+days = 90 
 start = date.today() - timedelta(days=days)
 end = date.today()
 
@@ -83,6 +85,11 @@ while True:
 
 		plt.clf()
 
+		qtt_elements = 0
+		for stock in stocks:
+			if stock["quantity"] > 0:
+				qtt_elements = qtt_elements + 1
+
 		for stock in stocks:
 			if stock["quantity"] > 0:
 				print("Pulling", stock["yahoo_id"])
@@ -101,9 +108,10 @@ while True:
 				
 				current_shares_value = current_shares_value + (online_data_current_rate * stock["quantity"])
 				last_shares_value = last_shares_value + (online_data_previous_close * stock["quantity"])
-				stock["day_price_list"].append(current_shares_value)
-				day_price_list_series = pd.Series(stock["day_price_list"])
-
+        stock["day_price_list"].append(current_shares_value)
+        day_price_list_series = pd.Series(stock["day_price_list"])
+        
+        # Console log
 				print(stock["ticker"] + format_value(online_data_current_rate) + ' ' + format_value(online_data_change) + ' (' + format_value(online_data_change_percentage) + ')' )
 
 				if historical.empty:
@@ -112,12 +120,12 @@ while True:
 					historical = historical + online_data["Total"]
 
 				# Row 1 - Close prices
-				plt.subplot2grid((3, 5), (0, plot_column), rowspan=1, colspan=1)
+				plt.subplot2grid((3, qtt_elements), (0, plot_column), rowspan=1, colspan=1)
 				plt.title(stock["ticker"] + ': ' + format_value(online_data_current_rate) + ' ' + format_value(online_data_change) + ' (' + format_value(online_data_change_percentage) + '%)' )
 				online_data['Close'].plot(color=get_color(online_data_change))
 
 				# Row 2 - Diff
-				plt.subplot2grid((3, 5), (1, plot_column), rowspan=1, colspan=1)
+				plt.subplot2grid((3, qtt_elements), (1, plot_column), rowspan=1, colspan=1)
 				plt.tick_params(
 				    axis='x',          # changes apply to the x-axis
 				    which='both',      # both major and minor ticks are affected
@@ -140,13 +148,13 @@ while True:
 		print('ACCOUNT TOTAL : ' + 	format_value(current_account_value) + ' ' + format_value(current_yield_value) + ' (' + format_value(current_yield_percentage) + '%)')
 
 		# Row 3 - Historical and Intraday
-		plt.subplot2grid((3, 5), (2, 0), rowspan=1, colspan=2)
+		plt.subplot2grid((3, qtt_elements), (2, 0), rowspan=1, colspan=2)
 		plt.title('Total : ' + format_value(current_account_value) + ' ' + format_value(current_yield_value) + ' (' + format_value(current_yield_percentage) + '%)' )
 		historical.plot(color=get_color(current_yield_value))		
 
 		intraday.append(current_account_value)
 		intraday_series = pd.Series(intraday)
-		plt.subplot2grid((3, 5), (2, 2), rowspan=1, colspan=3)
+		plt.subplot2grid((3, qtt_elements), (2, 3), rowspan=1, colspan=3)
 		plt.title('No dia : ' + format_value(current_day_yield_value) + ' (' + format_value(current_day_yield_percentage) + '%)' )
 		intraday_series.plot(color=get_color(current_day_yield_value))
 		
