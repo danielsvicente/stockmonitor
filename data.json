@@ -1,6 +1,6 @@
 {
-	"total_deposited": 7300.00,
-	"available_to_invest": 381.41,
+	"total_deposited": 27300.00,
+	"available_to_invest": 1127.86,
 	"transactions":[
 		{
 			"date": "03.04.2017",
@@ -48,7 +48,14 @@
 			"trades": [
 				{"type": "ADJUST", "ticker": "WEGE3", "yahoo_id": "WEGE3.SA", "quantity": 30}
 			]	
-		}
+		},
+		{
+                        "date": "11.01.2019",
+                        "total": -19276.15,
+                        "trades": [
+                                {"type": "BUY", "ticker": "CIEL3", "yahoo_id": "CIEL3.SA", "quantity": 1800, "price": 10.70}
+                        ]
+                }
 	],
 	"earnings": []
 }
