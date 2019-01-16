@@ -45,7 +45,7 @@ for transaction in transactions:
                 new_stock = False
         if new_stock is True:
             ti = trade['quantity'] * trade['price']
-            stocks.append(dict(ticker=trade['ticker'], yahoo_id=trade["yahoo_id"], quantity=trade['quantity'], average_price=trade['price'], total_invested=ti))
+            stocks.append(dict(ticker=trade['ticker'], yahoo_id=trade["yahoo_id"], quantity=trade['quantity'], average_price=trade['price'], total_invested=ti, day_price_list=[]))
 
 print(json.dumps(stocks, indent=4))
 
@@ -101,6 +101,8 @@ while True:
 				
 				current_shares_value = current_shares_value + (online_data_current_rate * stock["quantity"])
 				last_shares_value = last_shares_value + (online_data_previous_close * stock["quantity"])
+				stock["day_price_list"].append(current_shares_value)
+				day_price_list_series = pd.Series(stock["day_price_list"])
 
 				print(stock["ticker"] + format_value(online_data_current_rate) + ' ' + format_value(online_data_change) + ' (' + format_value(online_data_change_percentage) + ')' )
 
@@ -122,7 +124,8 @@ while True:
 				    bottom='off',      # ticks along the bottom edge are off
 				    top='off',         # ticks along the top edge are off
 				    labelbottom='off') # labels along the bottom edge are off
-				online_data['Diff'].plot(kind='bar', color=get_color(online_data_change))
+				#online_data['Diff'].plot(kind='bar', color=get_color(online_data_change))
+				day_price_list_series.plot(color=get_color(online_data_change))
 
 				plot_column = plot_column + 1
 
