@@ -1,6 +1,6 @@
 {
 	"total_deposited": 27300.00,
-	"available_to_invest": 1127.86,
+	"available_to_invest": 19824.08,
 	"transactions":[
 		{
 			"date": "03.04.2017",
@@ -54,6 +54,27 @@
                         "total": -19276.15,
                         "trades": [
                                 {"type": "BUY", "ticker": "CIEL3", "yahoo_id": "CIEL3.SA", "quantity": 1800, "price": 10.70}
+                        ]
+                },
+		{
+                        "date": "17.01.2019",
+                        "total": -18254.17,
+                        "trades": [
+                                {"type": "SELL", "ticker": "CIEL3", "yahoo_id": "CIEL3.SA", "quantity": 1800, "price": 10.15}
+                        ]
+                },
+                {
+                        "date": "23.01.2019",
+                        "total": -17565.60,
+                        "trades": [
+                                {"type": "BUY", "ticker": "ABEV3", "yahoo_id": "ABEV3.SA", "quantity": 1000, "price": 17.55}
+                        ]
+                },
+                {
+                        "date": "04.02.2019",
+                        "total": 17984.33,
+                        "trades": [
+                                {"type": "SELL", "ticker": "ABEV3", "yahoo_id": "ABEV3.SA", "quantity": 1000, "price": 18.00}
                         ]
                 }
 	],

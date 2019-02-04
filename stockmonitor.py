@@ -9,6 +9,7 @@ import json
 import os 
 
 # Some initial configurations for the gui
+
 plt.style.use('dark_background')
 plt.figure().subplots_adjust(hspace=0.5)
 plt.ion()
@@ -56,6 +57,7 @@ start = date.today() - timedelta(days=days)
 end = date.today()
 
 intraday = []
+ibvsp_intraday = []
 
 def calc_change(previous_close, current_rate):
 	change = current_rate - previous_close
@@ -80,12 +82,14 @@ while True:
 		current_shares_value = 0
 		last_shares_value = 0
 		historical = pd.Series()
+		ibvsp_today = pd.Series()
 
 		plot_column = 0
+		qtt_elements = 0
+		qtt_rows = 4
 
 		plt.clf()
 
-		qtt_elements = 0
 		for stock in stocks:
 			if stock["quantity"] > 0:
 				qtt_elements = qtt_elements + 1
@@ -108,10 +112,10 @@ while True:
 				
 				current_shares_value = current_shares_value + (online_data_current_rate * stock["quantity"])
 				last_shares_value = last_shares_value + (online_data_previous_close * stock["quantity"])
-        stock["day_price_list"].append(current_shares_value)
-        day_price_list_series = pd.Series(stock["day_price_list"])
-        
-        # Console log
+				stock["day_price_list"].append(current_shares_value)
+				day_price_list_series = pd.Series(stock["day_price_list"])
+				
+				# Console log
 				print(stock["ticker"] + format_value(online_data_current_rate) + ' ' + format_value(online_data_change) + ' (' + format_value(online_data_change_percentage) + ')' )
 
 				if historical.empty:
@@ -120,12 +124,12 @@ while True:
 					historical = historical + online_data["Total"]
 
 				# Row 1 - Close prices
-				plt.subplot2grid((3, qtt_elements), (0, plot_column), rowspan=1, colspan=1)
+				plt.subplot2grid((qtt_rows, qtt_elements), (0, plot_column), rowspan=1, colspan=1)
 				plt.title(stock["ticker"] + ': ' + format_value(online_data_current_rate) + ' ' + format_value(online_data_change) + ' (' + format_value(online_data_change_percentage) + '%)' )
 				online_data['Close'].plot(color=get_color(online_data_change))
 
 				# Row 2 - Diff
-				plt.subplot2grid((3, qtt_elements), (1, plot_column), rowspan=1, colspan=1)
+				plt.subplot2grid((qtt_rows, qtt_elements), (1, plot_column), rowspan=1, colspan=1)
 				plt.tick_params(
 				    axis='x',          # changes apply to the x-axis
 				    which='both',      # both major and minor ticks are affected
@@ -148,16 +152,43 @@ while True:
 		print('ACCOUNT TOTAL : ' + 	format_value(current_account_value) + ' ' + format_value(current_yield_value) + ' (' + format_value(current_yield_percentage) + '%)')
 
 		# Row 3 - Historical and Intraday
-		plt.subplot2grid((3, qtt_elements), (2, 0), rowspan=1, colspan=2)
+
+		plt.subplot2grid((qtt_rows, qtt_elements), (2, 0), rowspan=1, colspan=2)
 		plt.title('Total : ' + format_value(current_account_value) + ' ' + format_value(current_yield_value) + ' (' + format_value(current_yield_percentage) + '%)' )
 		historical.plot(color=get_color(current_yield_value))		
 
 		intraday.append(current_account_value)
 		intraday_series = pd.Series(intraday)
-		plt.subplot2grid((3, qtt_elements), (2, 3), rowspan=1, colspan=3)
-		plt.title('No dia : ' + format_value(current_day_yield_value) + ' (' + format_value(current_day_yield_percentage) + '%)' )
+		plt.subplot2grid((qtt_rows, qtt_elements), (2, 2), rowspan=1, colspan=3)
+		plt.title('Today : ' + format_value(current_day_yield_value) + ' (' + format_value(current_day_yield_percentage) + '%)' )
 		intraday_series.plot(color=get_color(current_day_yield_value))
-		
+
+		#### IBOVESPA index ####
+		online_ibvsp = web.get_data_yahoo("^BVSP", start, end)
+		online_ibvsp['Diff'] = online_ibvsp['Close'].diff()
+		if ibvsp_today.empty:
+			ibvsp_today = online_ibvsp['Close']
+		else:
+			ibvsp_today = ibvsp_today + online_ibvsp['Close']
+		ibvsp_intraday.append(online_ibvsp.iloc[-1]['Close'])
+		ibvsp_intraday_series = pd.Series(ibvsp_intraday)
+		online_ibvsp['Diff'] = online_ibvsp['Close'].diff()
+		online_ibvsp.fillna(method='ffill', inplace=True)
+
+		online_ibvsp_current_rate = online_ibvsp.iloc[-1]['Close']
+		online_ibvsp_previous_close = online_ibvsp.iloc[-2]['Close']
+		online_ibvsp_change, online_ibvsp_change_percentage = calc_change(online_ibvsp_previous_close, online_ibvsp_current_rate)
+
+		plt.subplot2grid((qtt_rows, qtt_elements), (3, 0), rowspan=1, colspan=2)
+		plt.title('IBOVESPA ' + str(days) + ' days')
+		ibvsp_today.plot(color=get_color(online_ibvsp_change))		
+
+		intraday.append(current_account_value)
+		intraday_series = pd.Series(intraday)
+		plt.subplot2grid((qtt_rows, qtt_elements), (3, 2), rowspan=1, colspan=3)
+		plt.title('IBOVESPA today: ' + format_value(online_ibvsp_change) + ' (' + format_value(online_ibvsp_change_percentage) + '%)' )
+		ibvsp_intraday_series.plot(color=get_color(online_ibvsp_current_rate))
+
 		plt.pause(0.05)
 		#time.sleep(0.1)
 
