@@ -1,6 +1,7 @@
 {
 	"total_deposited": 27300.00,
 	"available_to_invest": 1803.41,
+	"inflation": 3.5,
 	"transactions":[
 		{
 			"date": "03.04.2017",

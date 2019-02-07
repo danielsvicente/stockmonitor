@@ -26,9 +26,9 @@ with open(datafile_path, "r") as data_file:
 # Process data
 total_deposited = data["total_deposited"]
 available_to_invest = data["available_to_invest"]
+inflation = data["inflation"]
 transactions = data["transactions"]
 earnings = data["earnings"]
-earings = data["earnings"]
 stocks = []
 total_fees = 0.00
 total_earning = 0.00
@@ -155,7 +155,9 @@ while True:
 
 		current_account_value = current_shares_value + available_to_invest
 		current_yield_value = current_account_value - total_deposited
-		current_yield_percentage = (current_account_value * 100 / total_deposited) - 100
+		current_yield_percentage = current_account_value * 100 / total_deposited
+		yield_after_inflation = current_yield_value - (total_deposited * inflation / 100)
+		yield_after_inflation_percentage = yield_after_inflation * 100 / total_deposited
 		
 		current_day_yield_value = current_shares_value - last_shares_value
 		current_day_yield_percentage = (current_shares_value * 100 / last_shares_value) - 100
@@ -166,8 +168,8 @@ while True:
 		# Row 3 - Historical and Intraday
 
 		plt.subplot2grid((qtt_rows, qtt_elements), (2, 0), rowspan=1, colspan=2)
-		plt.title('Total : ' + format_value(current_account_value) + ' ' + format_value(current_yield_value) + ' (' + format_value(current_yield_percentage) + '%)' )
-		historical.plot(color=get_color(current_yield_value))		
+		plt.title('Total : ' + format_value(current_account_value) + ' ' + format_value(yield_after_inflation) + ' (' + format_value(yield_after_inflation_percentage) + '%)' )
+		historical.plot(color=get_color(yield_after_inflation))		
 
 		intraday.append(current_account_value)
 		intraday_series = pd.Series(intraday)
