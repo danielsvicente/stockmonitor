@@ -27,10 +27,15 @@ with open(datafile_path, "r") as data_file:
 total_deposited = data["total_deposited"]
 available_to_invest = data["available_to_invest"]
 transactions = data["transactions"]
+earnings = data["earnings"]
 earings = data["earnings"]
 stocks = []
+total_fees = 0.00
+total_earning = 0.00
+
 # Fill list of stocks
 for transaction in transactions:
+    total_fees = total_fees + abs(transaction['total_trade'] - transaction['total_after_fees'])
     for trade in transaction['trades']:
         new_stock = True
         for stock in stocks:
@@ -50,7 +55,14 @@ for transaction in transactions:
             ti = trade['quantity'] * trade['price']
             stocks.append(dict(ticker=trade['ticker'], yahoo_id=trade["yahoo_id"], quantity=trade['quantity'], average_price=trade['price'], total_invested=ti, day_price_list=[]))
 
+# Calculate total received from the companies to date
+for item in earnings:
+    total_earning = total_earning + item['value']
+
 print(json.dumps(stocks, indent=4))
+
+print('TOTAL PAID FEES TO DATE: ', str(total_fees))
+print('TOTAL RECEIVED TO DATE: ', str(total_earning))
 
 days = 90 
 start = date.today() - timedelta(days=days)

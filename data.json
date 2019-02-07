@@ -1,17 +1,19 @@
 {
 	"total_deposited": 27300.00,
-	"available_to_invest": 19824.08,
+	"available_to_invest": 1803.41,
 	"transactions":[
 		{
 			"date": "03.04.2017",
-			"total": -858.27,
+			"total_trade": -848.00,
+			"total_after_fees": -858.27,
 			"trades": [
 				{"type": "BUY", "ticker": "MOVI3", "yahoo_id": "MOVI3.SA", "quantity": 100, "price": 8.48}
 			]
 		},
 		{
 			"date": "15.05.2017",
-			"total": -6364.04,
+			"total_trade": -6322.00,
+			"total_after_fees": -6364.04,
 			"trades": [
 				{"type": "BUY", "ticker": "ABEV3", "yahoo_id": "ABEV3.SA", "quantity": 50, "price": 19.60},
 				{"type": "BUY", "ticker": "MOVI3", "yahoo_id": "MOVI3.SA", "quantity": 200, "price": 10.99},
@@ -21,14 +23,16 @@
 		},
 		{
 			"date": "21.12.2017",
-			"total": 1534.51,
+			"total_trade": 1545.00,
+			"total_after_fees": 1534.51,
 			"trades": [
 				{"type": "SELL", "ticker": "PTBL3", "yahoo_id": "PTBL3.SA", "quantity": 300, "price": 5.15}
 			]
 		},
 		{
 			"date": "26.12.2017",
-			"total": -1507.47,
+			"total_trade": -1487.00,
+			"total_after_fees": -1507.47,
 			"trades": [
 				{"type": "BUY", "ticker": "POMO4", "yahoo_id": "POMO4.SA", "quantity": 100, "price": 4.01},
 				{"type": "BUY", "ticker": "QGEP3", "yahoo_id": "QGEP3.SA", "quantity": 100, "price": 10.86}
@@ -36,7 +40,8 @@
 		},
 		{
 			"date": "21.02.2018",
-			"total": 130.45,
+			"total_trade": 151.00,
+			"total_after_fees": 130.45,
 			"trades": [
 				{"type": "BUY", "ticker": "GOAU4", "yahoo_id": "GOAU4.SA", "quantity": 100, "price": 7.93},
 				{"type": "SELL", "ticker": "QGEP3", "yahoo_id": "QGEP3.SA", "quantity": 100, "price": 9.44}
@@ -44,39 +49,86 @@
 		},
 		{
 			"date": null,
-			"total": 0.00,
+			"total_trade": 0.00,
+			"total_after_fees": 0.00,
 			"trades": [
 				{"type": "ADJUST", "ticker": "WEGE3", "yahoo_id": "WEGE3.SA", "quantity": 30}
 			]	
 		},
 		{
                         "date": "11.01.2019",
-                        "total": -19276.15,
+			"total_trade": -19260.00,
+                        "total_after_fees": -19276.15,
                         "trades": [
                                 {"type": "BUY", "ticker": "CIEL3", "yahoo_id": "CIEL3.SA", "quantity": 1800, "price": 10.70}
                         ]
                 },
 		{
                         "date": "17.01.2019",
-                        "total": -18254.17,
+			"total_trade": 18270.00,
+                        "total_after_fees": 18254.17,
                         "trades": [
                                 {"type": "SELL", "ticker": "CIEL3", "yahoo_id": "CIEL3.SA", "quantity": 1800, "price": 10.15}
                         ]
                 },
                 {
                         "date": "23.01.2019",
-                        "total": -17565.60,
+			"total_trade": -17550.00,
+                        "total_after_fees": -17565.60,
                         "trades": [
                                 {"type": "BUY", "ticker": "ABEV3", "yahoo_id": "ABEV3.SA", "quantity": 1000, "price": 17.55}
                         ]
                 },
                 {
                         "date": "04.02.2019",
-                        "total": 17984.33,
+			"total_trade": 18000.00,
+                        "total_after_fees": 17984.33,
                         "trades": [
                                 {"type": "SELL", "ticker": "ABEV3", "yahoo_id": "ABEV3.SA", "quantity": 1000, "price": 18.00}
                         ]
+                },
+                {
+                        "date": "05.02.2019",
+			"total_trade": -19070.00,
+                        "total_after_fees": -19096.00,
+                        "trades": [
+                                {"type": "BUY", "ticker": "ABEV3", "yahoo_id": "ABEV3.SA", "quantity": 500, "price": 18.54},
+				{"type": "BUY", "ticker": "MOVI3", "yahoo_id": "MOVI3.SA", "quantity": 1000, "price": 9.80}
+                        ]
+                },
+		{
+                        "date": "06.02.2019",
+			"total_trade": 1091.00,
+                        "total_after_fees": 1068.23,
+                        "trades": [
+                                {"type": "SELL", "ticker": "MOVI3", "yahoo_id": "MOVI3.SA", "quantity": 500, "price": 9.91},
+                                {"type": "BUY", "ticker": "WEGE3", "yahoo_id": "WEGE3.SA", "quantity": 200, "price": 19.32}
+                        ]
                 }
 	],
-	"earnings": []
+	"earnings": [
+		{"date": "17.07.2017", "value": 8.00, "type": "DIVIDEND", "ticker": "ABEV3", "shares": 50},
+		{"date": "16.08.2017", "value": 5.30, "type": "DIVIDEND", "ticker": "WEGE3", "shares": 100},
+		{"date": "17.08.2017", "value": 5.15, "type": "INTEREST", "ticker": "WEGE3", "shares": 100},
+		{"date": "18.08.2017", "value": 17.86, "type": "INTEREST", "ticker": "PTBL3", "shares": 300},
+		{"date": "28.12.2017", "value": 13.18, "type": "INTEREST", "ticker": "ABEV3", "shares": 50},
+		{"date": "14.03.2018", "value": 8.21, "type": "DIVIDEND", "ticker": "WEGE3", "shares": 100},
+		{"date": "14.03.2018", "value": 4.94, "type": "INTEREST", "ticker": "WEGE3", "shares": 100},
+		{"date": "14.03.2018", "value": 4.85, "type": "INTEREST", "ticker": "WEGE3", "shares": 100},
+		{"date": "29.03.2018", "value": 2.10, "type": "DIVIDEND", "ticker": "POMO4", "shares": 100},
+		{"date": "29.03.2018", "value": 1.58, "type": "INTEREST", "ticker": "POMO3", "shares": 100},
+		{"date": "30.05.2018", "value": 1.10, "type": "DIVIDEND", "ticker": "MOVI3", "shares": 300},
+		{"date": "30.05.2018", "value": 17.91, "type": "INTEREST", "ticker": "MOVI3", "shares": 300},
+		{"date": "01.06.2018", "value": 4.00, "type": "DIVIDEND", "ticker": "GOUA4", "shares": 100},
+		{"date": "30.07.2018", "value": 8.00, "type": "DIVIDEND", "ticker": "ABEV3", "shares": 50},
+		{"date": "15.08.2018", "value": 10.71, "type": "DIVIDEND", "ticker": "WEGE3", "shares": 130},
+		{"date": "15.08.2018", "value": 4.46, "type": "INTEREST", "ticker": "WEGE3", "shares": 10},
+		{"date": "15.08.2018", "value": 4.33, "type": "INTEREST", "ticker": "WEGE3", "shares": 130},
+		{"date": "30.08.2018", "value": 5.65, "type": "INTEREST", "ticker": "MOVI3", "shares": 300},
+		{"date": "31.08.2018", "value": 7.00, "type": "DIVIDEND", "ticker": "GOUA4", "shares": 100},
+		{"date": "01.10.2018", "value": 8.40, "type": "INTEREST", "ticker": "MOVI", "shares": 300},
+		{"date": "03.12.2018", "value": 9.00, "type": "DIVIDEND", "ticker": "GOUA4", "shares": 100},
+		{"date": "28.12.2018", "value": 13.60, "type": "INTEREST", "ticker": "ABEV3", "shares": 50},
+		{"date": "01.02.2019", "value": 7.65, "type": "INTEREST", "ticker": "POMO3", "shares": 100}
+	]
 }
