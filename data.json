@@ -117,19 +117,19 @@
 		{"date": "14.03.2018", "value": 4.94, "type": "INTEREST", "ticker": "WEGE3", "shares": 100},
 		{"date": "14.03.2018", "value": 4.85, "type": "INTEREST", "ticker": "WEGE3", "shares": 100},
 		{"date": "29.03.2018", "value": 2.10, "type": "DIVIDEND", "ticker": "POMO4", "shares": 100},
-		{"date": "29.03.2018", "value": 1.58, "type": "INTEREST", "ticker": "POMO3", "shares": 100},
+		{"date": "29.03.2018", "value": 1.58, "type": "INTEREST", "ticker": "POMO4", "shares": 100},
 		{"date": "30.05.2018", "value": 1.10, "type": "DIVIDEND", "ticker": "MOVI3", "shares": 300},
 		{"date": "30.05.2018", "value": 17.91, "type": "INTEREST", "ticker": "MOVI3", "shares": 300},
-		{"date": "01.06.2018", "value": 4.00, "type": "DIVIDEND", "ticker": "GOUA4", "shares": 100},
+		{"date": "01.06.2018", "value": 4.00, "type": "DIVIDEND", "ticker": "GOAU4", "shares": 100},
 		{"date": "30.07.2018", "value": 8.00, "type": "DIVIDEND", "ticker": "ABEV3", "shares": 50},
 		{"date": "15.08.2018", "value": 10.71, "type": "DIVIDEND", "ticker": "WEGE3", "shares": 130},
 		{"date": "15.08.2018", "value": 4.46, "type": "INTEREST", "ticker": "WEGE3", "shares": 10},
 		{"date": "15.08.2018", "value": 4.33, "type": "INTEREST", "ticker": "WEGE3", "shares": 130},
 		{"date": "30.08.2018", "value": 5.65, "type": "INTEREST", "ticker": "MOVI3", "shares": 300},
-		{"date": "31.08.2018", "value": 7.00, "type": "DIVIDEND", "ticker": "GOUA4", "shares": 100},
-		{"date": "01.10.2018", "value": 8.40, "type": "INTEREST", "ticker": "MOVI", "shares": 300},
-		{"date": "03.12.2018", "value": 9.00, "type": "DIVIDEND", "ticker": "GOUA4", "shares": 100},
+		{"date": "31.08.2018", "value": 7.00, "type": "DIVIDEND", "ticker": "GOAU4", "shares": 100},
+		{"date": "01.10.2018", "value": 8.40, "type": "INTEREST", "ticker": "MOVI3", "shares": 300},
+		{"date": "03.12.2018", "value": 9.00, "type": "DIVIDEND", "ticker": "GOAU4", "shares": 100},
 		{"date": "28.12.2018", "value": 13.60, "type": "INTEREST", "ticker": "ABEV3", "shares": 50},
-		{"date": "01.02.2019", "value": 7.65, "type": "INTEREST", "ticker": "POMO3", "shares": 100}
+		{"date": "01.02.2019", "value": 7.65, "type": "INTEREST", "ticker": "POMO4", "shares": 100}
 	]
 }

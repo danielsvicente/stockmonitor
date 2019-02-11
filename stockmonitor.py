@@ -30,6 +30,7 @@ inflation = data["inflation"]
 transactions = data["transactions"]
 earnings = data["earnings"]
 stocks = []
+dividends = {}
 total_fees = 0.00
 total_earning = 0.00
 
@@ -53,16 +54,18 @@ for transaction in transactions:
                 new_stock = False
         if new_stock is True:
             ti = trade['quantity'] * trade['price']
-            stocks.append(dict(ticker=trade['ticker'], yahoo_id=trade["yahoo_id"], quantity=trade['quantity'], average_price=trade['price'], total_invested=ti, day_price_list=[]))
+            stocks.append(dict(ticker=trade['ticker'], yahoo_id=trade["yahoo_id"], quantity=trade['quantity'], average_price=trade['price'], total_invested=ti, dividend=0.0, day_price_list=[]))
+            dividends[trade['ticker']] = dict(ticker=trade['ticker'], yahoo_id=trade["yahoo_id"], quantity=trade['quantity'], average_price=trade['price'], total_invested=ti, dividend_total=0.0, dividend_per_share=0.0, dividend_average=0.0, dividend_count=0, day_price_list=[])
+
 
 # Calculate total received from the companies to date
 for item in earnings:
+    dividends[item['ticker']]['dividend_count'] = dividends[item['ticker']]['dividend_count'] + 1
+    dividends[item['ticker']]['dividend_total'] = dividends[item['ticker']]['dividend_total'] + item['value']
+    dividends[item['ticker']]['dividend_per_share'] = dividends[item['ticker']]['dividend_per_share'] + (item['value'] / item['shares'])
+    dividends[item['ticker']]['dividend_average'] = dividends[item['ticker']]['dividend_per_share'] / dividends[item['ticker']]['dividend_count']
     total_earning = total_earning + item['value']
 
-print(json.dumps(stocks, indent=4))
-
-print('TOTAL PAID FEES TO DATE: ', str(total_fees))
-print('TOTAL RECEIVED TO DATE: ', str(total_earning))
 
 days = 90 
 start = date.today() - timedelta(days=days)
@@ -86,6 +89,17 @@ def get_color(value):
         return 'red'
     else:
         return 'grey'
+
+print(json.dumps(stocks, indent=4))
+print('TOTAL PAID FEES TO DATE: ', format_value(total_fees))
+print('TOTAL RECEIVED TO DATE: ', format_value(total_earning))
+print('--------------------')
+print('     DIVIDENDS      ')
+print('--------------------')
+for stock in stocks:
+    if dividends[stock['ticker']]:
+        print(dividends[stock['ticker']]['ticker'], " ", format_value(dividends[stock['ticker']]['dividend_total']), " ", format_value(dividends[stock['ticker']]['dividend_average']))
+
 
 while True:
 
