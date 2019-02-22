@@ -107,6 +107,7 @@ while True:
 
 		current_shares_value = 0
 		last_shares_value = 0
+		df_hist = pd.DataFrame()
 		historical = pd.Series()
 		ibvsp_today = pd.Series()
 
@@ -127,8 +128,8 @@ while True:
 				online_data = web.get_data_yahoo(str(stock["yahoo_id"]), start, end)
 
 				online_data['Diff'] = online_data['Close'].diff()
+				online_data['DiffTotal'] = online_data['Diff'] * stock["quantity"]
 				online_data['Total'] = online_data['Close'] * stock["quantity"]
-
 				# Cleaning datasets from possible NaN values
 				online_data.fillna(method='ffill', inplace=True)
 
@@ -148,7 +149,7 @@ while True:
 					historical = online_data["Total"]
 				else:
 					historical = historical + online_data["Total"]
-
+				
 				# Row 1 - Close prices
 				plt.subplot2grid((qtt_rows, qtt_elements), (0, plot_column), rowspan=1, colspan=1)
 				plt.title(stock["ticker"] + ': ' + format_value(online_data_current_rate) + ' ' + format_value(online_data_change) + ' (' + format_value(online_data_change_percentage) + '%)' )
@@ -176,8 +177,13 @@ while True:
 		current_day_yield_value = current_shares_value - last_shares_value
 		current_day_yield_percentage = (current_shares_value * 100 / last_shares_value) - 100
 		
+		df_hist["Total"] = historical
+		df_hist["Diff"] = df_hist["Total"].diff()
+
 		print('SHARES TOTAL : ' + format_value(current_shares_value))
 		print('ACCOUNT TOTAL : ' + 	format_value(current_account_value) + ' ' + format_value(current_yield_value) + ' (' + format_value(current_yield_percentage) + '%)')
+		print("HISTORICAL")				
+		print(df_hist)
 
 		# Row 3 - Historical and Intraday
 
