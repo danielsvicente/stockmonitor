@@ -1,6 +1,6 @@
 {
 	"total_deposited": 27300.00,
-	"available_to_invest": 1803.41,
+	"available_to_invest": 103.01,
 	"inflation": 3.5,
 	"transactions":[
 		{
@@ -105,7 +105,15 @@
                                 {"type": "SELL", "ticker": "MOVI3", "yahoo_id": "MOVI3.SA", "quantity": 500, "price": 9.91},
                                 {"type": "BUY", "ticker": "WEGE3", "yahoo_id": "WEGE3.SA", "quantity": 200, "price": 19.32}
                         ]
-                }
+                },
+		{
+			"date": "28.02.2019",
+                        "total_trade": -1733.47,
+                        "total_after_fees": -1743.53,
+                        "trades": [
+                                {"type": "BUY", "ticker": "ABEV3", "yahoo_id": "ABEV3.SA", "quantity": 100, "price": 17.33}
+                        ]
+		}
 	],
 	"earnings": [
 		{"date": "17.07.2017", "value": 8.00, "type": "DIVIDEND", "ticker": "ABEV3", "shares": 50},
@@ -113,6 +121,7 @@
 		{"date": "17.08.2017", "value": 5.15, "type": "INTEREST", "ticker": "WEGE3", "shares": 100},
 		{"date": "18.08.2017", "value": 17.86, "type": "INTEREST", "ticker": "PTBL3", "shares": 300},
 		{"date": "28.12.2017", "value": 13.18, "type": "INTEREST", "ticker": "ABEV3", "shares": 50},
+		{"date": "22.02.2018", "value": 3.50, "type": "DIVIDEND", "ticker": "ABEV3", "shares": 50},
 		{"date": "14.03.2018", "value": 8.21, "type": "DIVIDEND", "ticker": "WEGE3", "shares": 100},
 		{"date": "14.03.2018", "value": 4.94, "type": "INTEREST", "ticker": "WEGE3", "shares": 100},
 		{"date": "14.03.2018", "value": 4.85, "type": "INTEREST", "ticker": "WEGE3", "shares": 100},
@@ -130,6 +139,11 @@
 		{"date": "01.10.2018", "value": 8.40, "type": "INTEREST", "ticker": "MOVI3", "shares": 300},
 		{"date": "03.12.2018", "value": 9.00, "type": "DIVIDEND", "ticker": "GOAU4", "shares": 100},
 		{"date": "28.12.2018", "value": 13.60, "type": "INTEREST", "ticker": "ABEV3", "shares": 50},
-		{"date": "01.02.2019", "value": 7.65, "type": "INTEREST", "ticker": "POMO4", "shares": 100}
+		{"date": "01.02.2019", "value": 7.65, "type": "INTEREST", "ticker": "POMO4", "shares": 100},
+		{"date": "13.03.2019", "value": 27.35, "type": "DIVIDEND", "ticker": "WEGE3", "shares": 330},
+		{"date": "13.03.2019", "value": 4.34, "type": "INTEREST", "ticker": "WEGE3", "shares": 130},
+		{"date": "13.03.2019", "value": 5.68, "type": "INTEREST", "ticker": "WEGE3", "shares": 130},
+		{"date": "18.03.2019", "value": 5.00, "type": "DIVIDEND", "ticker": "GOAU4", "shares": 100},
+		{"date": "05.04.2019", "value": 24.67, "type": "PROVENTS", "ticker": "MOVI3", "shares": 300}
 	]
 }

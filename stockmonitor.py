@@ -1,3 +1,5 @@
+import sys
+import os
 from datetime import date, timedelta
 import matplotlib.pyplot as plt
 from matplotlib import style
@@ -6,9 +8,18 @@ import pandas_datareader.data as web
 import time
 import numpy as np
 import json
-import os 
+import logging
+import inspect
+
+
+def lineno():
+    """Returns the current line number in our program."""
+    return inspect.currentframe().f_back.f_lineno
 
 # Some initial configurations for the gui
+if len(sys.argv) > 1:
+    if sys.argv[1] == "debug":
+        logging.basicConfig(level=logging.DEBUG)
 
 plt.style.use('dark_background')
 plt.figure().subplots_adjust(hspace=0.5)
@@ -67,7 +78,7 @@ for item in earnings:
     total_earning = total_earning + item['value']
 
 
-days = 90 
+days = 180 
 start = date.today() - timedelta(days=days)
 end = date.today()
 
@@ -90,7 +101,11 @@ def get_color(value):
     else:
         return 'grey'
 
-print(json.dumps(stocks, indent=4))
+
+logging.debug(json.dumps(stocks, indent=4))
+logging.debug(json.dumps(dividends, indent=4))
+
+
 print('TOTAL PAID FEES TO DATE: ', format_value(total_fees))
 print('TOTAL RECEIVED TO DATE: ', format_value(total_earning))
 print('--------------------')
@@ -116,14 +131,14 @@ while True:
 		qtt_rows = 4
 
 		plt.clf()
-
+ 
 		for stock in stocks:
 			if stock["quantity"] > 0:
 				qtt_elements = qtt_elements + 1
 
 		for stock in stocks:
 			if stock["quantity"] > 0:
-				print("Pulling", stock["yahoo_id"])
+				logging.debug("Pulling", stock["yahoo_id"])
 
 				online_data = web.get_data_yahoo(str(stock["yahoo_id"]), start, end)
 
@@ -143,7 +158,7 @@ while True:
 				day_price_list_series = pd.Series(stock["day_price_list"])
 				
 				# Console log
-				print(stock["ticker"] + format_value(online_data_current_rate) + ' ' + format_value(online_data_change) + ' (' + format_value(online_data_change_percentage) + ')' )
+				logging.debug(stock["ticker"] + format_value(online_data_current_rate) + ' ' + format_value(online_data_change) + ' (' + format_value(online_data_change_percentage) + ')' )
 
 				if historical.empty:
 					historical = online_data["Total"]
@@ -180,10 +195,10 @@ while True:
 		df_hist["Total"] = historical
 		df_hist["Diff"] = df_hist["Total"].diff()
 
-		print('SHARES TOTAL : ' + format_value(current_shares_value))
-		print('ACCOUNT TOTAL : ' + 	format_value(current_account_value) + ' ' + format_value(current_yield_value) + ' (' + format_value(current_yield_percentage) + '%)')
-		print("HISTORICAL")				
-		print(df_hist)
+		logging.debug('SHARES TOTAL : ' + format_value(current_shares_value))
+		logging.debug('ACCOUNT TOTAL : ' + 	format_value(current_account_value) + ' ' + format_value(current_yield_value) + ' (' + format_value(current_yield_percentage) + '%)')
+		logging.debug("HISTORICAL")				
+		logging.debug(df_hist)
 
 		# Row 3 - Historical and Intraday
 
@@ -221,12 +236,12 @@ while True:
 		intraday_series = pd.Series(intraday)
 		plt.subplot2grid((qtt_rows, qtt_elements), (3, 2), rowspan=1, colspan=3)
 		plt.title('IBOVESPA today: ' + format_value(online_ibvsp_change) + ' (' + format_value(online_ibvsp_change_percentage) + '%)' )
-		ibvsp_intraday_series.plot(color=get_color(online_ibvsp_current_rate))
+		ibvsp_intraday_series.plot(color=get_color(online_ibvsp_change))
 
 		plt.pause(0.05)
 		#time.sleep(0.1)
 
 	except Exception as e:
-		print(e)
+                logging.error("line %s: %s", lineno(), e)
 
 
