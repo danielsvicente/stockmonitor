@@ -12,10 +12,6 @@ import logging
 import inspect
 
 
-def lineno():
-    """Returns the current line number in our program."""
-    return inspect.currentframe().f_back.f_lineno
-
 # Some initial configurations for the gui
 if len(sys.argv) > 1:
     if sys.argv[1] == "debug":
@@ -105,9 +101,22 @@ def get_color(value):
 logging.debug(json.dumps(stocks, indent=4))
 logging.debug(json.dumps(dividends, indent=4))
 
+print('-----------------------------------')
+print('       SHARES AVERAGE PRICES       ')
+print('-----------------------------------')
+for stock in stocks:
+    if stock['quantity'] > 0:
+        online_data = web.get_data_yahoo(str(stock["yahoo_id"]), start, end)
+        logging.debug(online_data.iloc[-2])
+        close_price = online_data.iloc[-2]['Close']
+        # calculating yield
+        total_with_average_price = stock['quantity'] * stock['average_price']
+        total_with_close_price = stock['quantity'] * close_price
+        current_difference = total_with_close_price - total_with_average_price
+        current_yield = (100 * total_with_close_price / total_with_average_price) - 100
+        print(stock['ticker'], " ", format_value(stock['quantity']), " ", format_value(stock['total_invested']), " ", format_value(stock['average_price']), " ", format_value(close_price), " ", format_value(current_yield), "%", " ", format_value(current_difference))
 
-print('TOTAL PAID FEES TO DATE: ', format_value(total_fees))
-print('TOTAL RECEIVED TO DATE: ', format_value(total_earning))
+print('')
 print('--------------------')
 print('     DIVIDENDS      ')
 print('--------------------')
@@ -115,6 +124,9 @@ for stock in stocks:
     if dividends[stock['ticker']]:
         print(dividends[stock['ticker']]['ticker'], " ", format_value(dividends[stock['ticker']]['dividend_total']), " ", format_value(dividends[stock['ticker']]['dividend_average']))
 
+print('')
+print('TOTAL PAID FEES TO DATE: ', format_value(total_fees))
+print('TOTAL RECEIVED TO DATE: ', format_value(total_earning))
 
 while True:
 
@@ -242,6 +254,6 @@ while True:
 		#time.sleep(0.1)
 
 	except Exception as e:
-                logging.error("line %s: %s", lineno(), e)
+                logging.error(e)
 
 
