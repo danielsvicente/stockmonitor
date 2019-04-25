@@ -101,9 +101,9 @@ def get_color(value):
 logging.debug(json.dumps(stocks, indent=4))
 logging.debug(json.dumps(dividends, indent=4))
 
-print('-----------------------------------')
-print('       SHARES AVERAGE PRICES       ')
-print('-----------------------------------')
+print('-------------------------------------------------------------------------')
+print('                          SHARES AVERAGE PRICES                          ')
+print('-------------------------------------------------------------------------')
 for stock in stocks:
     if stock['quantity'] > 0:
         online_data = web.get_data_yahoo(str(stock["yahoo_id"]), start, end)
@@ -114,15 +114,23 @@ for stock in stocks:
         total_with_close_price = stock['quantity'] * close_price
         current_difference = total_with_close_price - total_with_average_price
         current_yield = (100 * total_with_close_price / total_with_average_price) - 100
-        print(stock['ticker'], " ", format_value(stock['quantity']), " ", format_value(stock['total_invested']), " ", format_value(stock['average_price']), " ", format_value(close_price), " ", format_value(current_yield), "%", " ", format_value(current_difference))
+        print(stock['ticker'], \
+                str(stock['quantity']).rjust(10), \
+                format_value(stock['total_invested']).rjust(10), \
+                format_value(stock['average_price']).rjust(10), \
+                format_value(close_price).rjust(10), \
+                format_value(current_yield).rjust(10), "%", \
+                format_value(current_difference).rjust(10))
 
 print('')
-print('--------------------')
-print('     DIVIDENDS      ')
-print('--------------------')
+print('---------------------------')
+print('         DIVIDENDS         ')
+print('---------------------------')
 for stock in stocks:
     if dividends[stock['ticker']]:
-        print(dividends[stock['ticker']]['ticker'], " ", format_value(dividends[stock['ticker']]['dividend_total']), " ", format_value(dividends[stock['ticker']]['dividend_average']))
+        print(dividends[stock['ticker']]['ticker'], \
+		format_value(dividends[stock['ticker']]['dividend_total']).rjust(10), \
+		format_value(dividends[stock['ticker']]['dividend_average']).rjust(10))
 
 print('')
 print('TOTAL PAID FEES TO DATE: ', format_value(total_fees))
@@ -216,7 +224,8 @@ while True:
 
 		plt.subplot2grid((qtt_rows, qtt_elements), (2, 0), rowspan=1, colspan=2)
 		plt.title('Total : ' + format_value(current_account_value) + ' ' + format_value(yield_after_inflation) + ' (' + format_value(yield_after_inflation_percentage) + '%)' )
-		historical.plot(color=get_color(yield_after_inflation))		
+		historical.plot(color=get_color(yield_after_inflation))
+		print(historical)
 
 		intraday.append(current_account_value)
 		intraday_series = pd.Series(intraday)
@@ -242,7 +251,7 @@ while True:
 
 		plt.subplot2grid((qtt_rows, qtt_elements), (3, 0), rowspan=1, colspan=2)
 		plt.title('IBOVESPA ' + str(days) + ' days')
-		ibvsp_today.plot(color=get_color(online_ibvsp_change))		
+		ibvsp_today.plot(color=get_color(online_ibvsp_change))
 
 		intraday.append(current_account_value)
 		intraday_series = pd.Series(intraday)
