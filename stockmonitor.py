@@ -107,8 +107,8 @@ print('-------------------------------------------------------------------------
 for stock in stocks:
     if stock['quantity'] > 0:
         online_data = web.get_data_yahoo(str(stock["yahoo_id"]), start, end)
-        logging.debug(online_data.iloc[-2])
-        close_price = online_data.iloc[-2]['Close']
+        logging.debug(online_data.iloc[-1])
+        close_price = online_data.iloc[-1]['Close']
         # calculating yield
         total_with_average_price = stock['quantity'] * stock['average_price']
         total_with_close_price = stock['quantity'] * close_price
@@ -225,7 +225,6 @@ while True:
 		plt.subplot2grid((qtt_rows, qtt_elements), (2, 0), rowspan=1, colspan=2)
 		plt.title('Total : ' + format_value(current_account_value) + ' ' + format_value(yield_after_inflation) + ' (' + format_value(yield_after_inflation_percentage) + '%)' )
 		historical.plot(color=get_color(yield_after_inflation))
-		print(historical)
 
 		intraday.append(current_account_value)
 		intraday_series = pd.Series(intraday)

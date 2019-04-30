@@ -1,7 +1,7 @@
 {
-	"total_deposited": 27300.00,
-	"available_to_invest": 103.01,
-	"inflation": 3.5,
+	"total_deposited": 35300.00,
+	"available_to_invest": 80.49,
+	"inflation": 4.576,
 	"transactions":[
 		{
 			"date": "03.04.2017",
@@ -113,7 +113,17 @@
                         "trades": [
                                 {"type": "BUY", "ticker": "ABEV3", "yahoo_id": "ABEV3.SA", "quantity": 100, "price": 17.33}
                         ]
-		}
+		},
+                {
+                        "date": "25.04.2019",
+                        "total_trade": -8000.00,
+                        "total_after_fees": -8020.00,
+                        "trades": [
+                                {"type": "BUY", "ticker": "ITSA4", "yahoo_id": "ITSA4.SA", "quantity": 500, "price": 11.85},
+				{"type": "BUY", "ticker": "TRPL4", "yahoo_id": "TRPL4.SA", "quantity": 100, "price": 20.75}
+                        ]
+                }
+
 	],
 	"earnings": [
 		{"date": "17.07.2017", "value": 8.00, "type": "DIVIDEND", "ticker": "ABEV3", "shares": 50},
