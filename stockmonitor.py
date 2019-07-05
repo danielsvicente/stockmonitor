@@ -74,7 +74,7 @@ for item in earnings:
     total_earning = total_earning + item['value']
 
 
-days = 180 
+days = 90 
 start = date.today() - timedelta(days=days)
 end = date.today()
 
@@ -101,9 +101,9 @@ def get_color(value):
 logging.debug(json.dumps(stocks, indent=4))
 logging.debug(json.dumps(dividends, indent=4))
 
-print('-------------------------------------------------------------------------')
-print('                          SHARES AVERAGE PRICES                          ')
-print('-------------------------------------------------------------------------')
+print('------------------------------------------------------------------------------------')
+print('                               SHARES AVERAGE PRICES                                ')
+print('------------------------------------------------------------------------------------')
 for stock in stocks:
     if stock['quantity'] > 0:
         online_data = web.get_data_yahoo(str(stock["yahoo_id"]), start, end)
@@ -120,7 +120,8 @@ for stock in stocks:
                 format_value(stock['average_price']).rjust(10), \
                 format_value(close_price).rjust(10), \
                 format_value(current_yield).rjust(10), "%", \
-                format_value(current_difference).rjust(10))
+                format_value(current_difference).rjust(10), \
+                format_value(total_with_close_price).rjust(10))
 
 print('')
 print('---------------------------')
@@ -222,13 +223,13 @@ while True:
 
 		# Row 3 - Historical and Intraday
 
-		plt.subplot2grid((qtt_rows, qtt_elements), (2, 0), rowspan=1, colspan=2)
+		plt.subplot2grid((qtt_rows, qtt_elements), (2, 0), rowspan=1, colspan=3)
 		plt.title('Total : ' + format_value(current_account_value) + ' ' + format_value(yield_after_inflation) + ' (' + format_value(yield_after_inflation_percentage) + '%)' )
 		historical.plot(color=get_color(yield_after_inflation))
 
 		intraday.append(current_account_value)
 		intraday_series = pd.Series(intraday)
-		plt.subplot2grid((qtt_rows, qtt_elements), (2, 2), rowspan=1, colspan=3)
+		plt.subplot2grid((qtt_rows, qtt_elements), (2, 3), rowspan=1, colspan=4)
 		plt.title('Today : ' + format_value(current_day_yield_value) + ' (' + format_value(current_day_yield_percentage) + '%)' )
 		intraday_series.plot(color=get_color(current_day_yield_value))
 
@@ -248,13 +249,13 @@ while True:
 		online_ibvsp_previous_close = online_ibvsp.iloc[-2]['Close']
 		online_ibvsp_change, online_ibvsp_change_percentage = calc_change(online_ibvsp_previous_close, online_ibvsp_current_rate)
 
-		plt.subplot2grid((qtt_rows, qtt_elements), (3, 0), rowspan=1, colspan=2)
+		plt.subplot2grid((qtt_rows, qtt_elements), (3, 0), rowspan=1, colspan=3)
 		plt.title('IBOVESPA ' + str(days) + ' days')
 		ibvsp_today.plot(color=get_color(online_ibvsp_change))
 
 		intraday.append(current_account_value)
 		intraday_series = pd.Series(intraday)
-		plt.subplot2grid((qtt_rows, qtt_elements), (3, 2), rowspan=1, colspan=3)
+		plt.subplot2grid((qtt_rows, qtt_elements), (3, 3), rowspan=1, colspan=4)
 		plt.title('IBOVESPA today: ' + format_value(online_ibvsp_change) + ' (' + format_value(online_ibvsp_change_percentage) + '%)' )
 		ibvsp_intraday_series.plot(color=get_color(online_ibvsp_change))
 
