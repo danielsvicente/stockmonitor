@@ -41,6 +41,8 @@ dividends = {}
 total_fees = 0.00
 total_earning = 0.00
 
+total_money = 0.00
+
 # Fill list of stocks
 for transaction in transactions:
     total_fees = total_fees + abs(transaction['total_trade'] - transaction['total_after_fees'])
@@ -109,6 +111,7 @@ for stock in stocks:
         online_data = web.get_data_yahoo(str(stock["yahoo_id"]), start, end)
         logging.debug(online_data.iloc[-1])
         close_price = online_data.iloc[-1]['Close']
+        total_money = total_money + (close_price * stock['quantity'])
         # calculating yield
         total_with_average_price = stock['quantity'] * stock['average_price']
         total_with_close_price = stock['quantity'] * close_price
@@ -134,8 +137,14 @@ for stock in stocks:
 		format_value(dividends[stock['ticker']]['dividend_average']).rjust(10))
 
 print('')
-print('TOTAL PAID FEES TO DATE: ', format_value(total_fees))
-print('TOTAL RECEIVED TO DATE: ', format_value(total_earning))
+print('TOTAL INVESTED: ', format_value(total_deposited).rjust(10))
+print('TOTAL TODAY   : ', format_value(total_money + available_to_invest).rjust(10))
+print('BALANCE       : ', format_value(total_money + available_to_invest - total_deposited).rjust(10))
+
+print('')
+print('TOTAL PAID FEES TO DATE: ', format_value(total_fees).rjust(10))
+print('TOTAL RECEIVED TO DATE : ', format_value(total_earning).rjust(10))
+print('')
 
 while True:
 
