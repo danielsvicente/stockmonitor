@@ -1,6 +1,6 @@
 {
 	"total_deposited": 43600.00,
-	"available_to_invest": 6135.40,
+	"available_to_invest": 7159.08,
 	"inflation": 4.576,
 	"transactions":[
 		{
@@ -129,6 +129,15 @@
                         "total_after_fees": -2347.73,
                         "trades": [
                                 {"type": "BUY", "ticker": "MGLU3", "yahoo_id": "MGLU3.SA", "quantity": 10, "price": 233.70}
+                        ]
+                },
+		{
+                        "date": "26.07.2019",
+                        "total_trade": 1043.72,
+                        "total_after_fees": 1023.68,
+                        "trades": [
+                                {"type": "SELL", "ticker": "GOAU4", "yahoo_id": "GOAU4.SA", "quantity": 100, "price": 6.60},
+				{"type": "SELL", "ticker": "POMO4", "yahoo_id": "POMO4.SA", "quantity": 100, "price": 3.84}
                         ]
                 }
 
