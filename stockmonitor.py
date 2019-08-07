@@ -58,6 +58,8 @@ for transaction in transactions:
                     stock['total_invested'] = stock['total_invested'] - (trade['quantity'] * trade['price'])
                 elif trade['type'] == 'ADJUST':
                 	stock['quantity'] = stock['quantity'] + trade['quantity']
+                elif trade['type'] == 'SPLIT':
+                        stock['quantity'] = stock['quantity'] * trade['factor']
                 if stock['quantity'] > 0:
                     stock['average_price'] = stock['total_invested'] / stock['quantity']
                 new_stock = False
