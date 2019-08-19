@@ -1,9 +1,15 @@
+# First do an update
+sudo apt update
+
+# Install pip
+sudo apt install python3-pip
+
 # Install Matplolib
-pip install matplotlib
+pip3 install matplotlib
 
 # Install TKinter
 sudo apt-get install python3-tk
 
 # Install Pandas
-pip install pandas
-pip install pandas_datareader
+pip3 install pandas
+pip3 install pandas_datareader
