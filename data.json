@@ -1,6 +1,6 @@
 {
 	"total_deposited": 43600.00,
-	"available_to_invest": 7159.08,
+	"available_to_invest": 3450.12,
 	"inflation": 4.576,
 	"transactions":[
 		{
@@ -147,7 +147,15 @@
 			"trades": [
 				{"type": "SPLIT", "ticker": "MGLU3", "yahoo_id": "MGLU3.SA", "factor": 8}
 			]
-		}
+		},
+		{
+                        "date": "14.08.2019",
+                        "total_trade": -3800.00,
+                        "total_after_fees": -3811.19,
+                        "trades": [
+                                {"type": "BUY", "ticker": "MGLU3", "yahoo_id": "MGLU3.SA", "quantity": 100, "price": 38.80}
+                        ]
+                }
 
 	],
 	"earnings": [
@@ -183,6 +191,10 @@
 		{"data": "30.05.2019", "value": 4.00, "type": "DIVIDEND", "ticker": "GOAU4", "shares": 100},
 		{"data": "01.07.2019", "value": 10.00, "type": "DIVIDEND", "ticker": "ITSA4", "shares": 500},
 		{"data": "05.07.2019", "value": 36.82, "type": "INTEREST", "ticker": "MOVI3", "shares": 300},
-		{"data": "10.07.2019", "value": 51.82, "type": "INTEREST", "ticker": "MOVI3", "shares": 800}
+		{"data": "10.07.2019", "value": 51.82, "type": "INTEREST", "ticker": "MOVI3", "shares": 800},
+		{"data": "14.08.2019", "value": 29.40, "type": "DIVIDEND", "ticker": "WEGE3", "shares": 300},
+		{"data": "14.08.2019", "value": 13.02, "type": "INTEREST", "ticker": "WEGE3", "shares": 300},
+		{"data": "14.08.2019", "value": 12.03, "type": "INTEREST", "ticker": "WEGE3", "shares": 300},
+		{"data": "19.08.2019", "value": 47.78, "type": "INTEREST", "ticker": "TRPL4", "shares": 100}
 	]
 }
