@@ -153,6 +153,33 @@ print('TOTAL PAID FEES TO DATE: ', format_value(total_fees).rjust(10))
 print('TOTAL RECEIVED TO DATE : ', format_value(total_earning).rjust(10))
 print('')
 
+
+print('--------------------------------------------')
+print('             ANNUAL PERFORMANCE             ')
+print('--------------------------------------------')
+print('              2018         2019         2020')
+print('--------------------------------------------')
+for stock in stocks:
+    if stock['quantity'] > 0:
+        online_data = web.get_data_yahoo(str(stock["yahoo_id"]), date(2018,1,1), end)
+        
+        data_set = online_data.loc['2018-1-1':'2018-12-31']
+        first_price = data_set.iloc[0]['Close']
+        last_price = data_set.iloc[-1]['Close']
+        price_yield_2018 = ((100 * last_price) / first_price ) - 100
+        
+        data_set = online_data.loc['2019-1-1':'2019-12-31']
+        first_price = data_set.iloc[0]['Close']
+        last_price = data_set.iloc[-1]['Close']
+        price_yield_2019 = ((100 * last_price) / first_price ) - 100
+        
+        data_set = online_data.loc['2020-1-1':'2020-12-31']
+        first_price = data_set.iloc[0]['Close']
+        last_price = data_set.iloc[-1]['Close']
+        price_yield_2020 = ((100 * last_price) / first_price ) - 100
+        
+        print(stock['ticker'], format_value(price_yield_2018).rjust(10), '%', format_value(price_yield_2019).rjust(10), '%', format_value(price_yield_2020).rjust(10), '%')
+
 while True:
 
 	try:
