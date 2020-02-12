@@ -10,12 +10,18 @@ import numpy as np
 import json
 import logging
 import inspect
+import argparse
 
+parser = argparse.ArgumentParser(description='Monitor for stock shares.')
+parser.add_argument('-v', '--verbose', action='store_true', help='print out all call outputs and debug logs')
+parser.add_argument('-p', '--period', default=30, help='number of days for stock history')
+args = parser.parse_args()
 
-# Some initial configurations for the gui
-if len(sys.argv) > 1:
-    if sys.argv[1] == "debug":
-        logging.basicConfig(level=logging.DEBUG)
+if args.verbose:
+    logging.basicConfig(level=logging.DEBUG)
+    logging.debug('verbose=' + str(args.verbose))
+    logging.debug('period=' + str(args.period))
+
 
 plt.style.use('dark_background')
 plt.figure().subplots_adjust(hspace=0.5)
@@ -77,9 +83,8 @@ for item in earnings:
     dividends[item['ticker']]['dividend_average'] = dividends[item['ticker']]['dividend_per_share'] / dividends[item['ticker']]['dividend_count']
     total_earning = total_earning + item['value']
 
-
-days = 90 
-start = date.today() - timedelta(days=days)
+period = int(args.period)
+start = date.today() - timedelta(days=period)
 end = date.today()
 
 intraday = []
@@ -163,7 +168,7 @@ while True:
 		qtt_rows = 4
 
 		plt.clf()
- 
+
 		for stock in stocks:
 			if stock["quantity"] > 0:
 				qtt_elements = qtt_elements + 1
@@ -173,6 +178,7 @@ while True:
 				logging.debug("Pulling", stock["yahoo_id"])
 
 				online_data = web.get_data_yahoo(str(stock["yahoo_id"]), start, end)
+				logging.debug(online_data)
 
 				online_data['Diff'] = online_data['Close'].diff()
 				online_data['DiffTotal'] = online_data['Diff'] * stock["quantity"]
@@ -183,12 +189,12 @@ while True:
 				online_data_current_rate = online_data.iloc[-1]['Close']
 				online_data_previous_close = online_data.iloc[-2]['Close']
 				online_data_change, online_data_change_percentage = calc_change(online_data_previous_close, online_data_current_rate)
-				
+
 				current_shares_value = current_shares_value + (online_data_current_rate * stock["quantity"])
 				last_shares_value = last_shares_value + (online_data_previous_close * stock["quantity"])
 				stock["day_price_list"].append(current_shares_value)
 				day_price_list_series = pd.Series(stock["day_price_list"])
-				
+
 				# Console log
 				logging.debug(stock["ticker"] + format_value(online_data_current_rate) + ' ' + format_value(online_data_change) + ' (' + format_value(online_data_change_percentage) + ')' )
 
@@ -196,7 +202,7 @@ while True:
 					historical = online_data["Total"]
 				else:
 					historical = historical + online_data["Total"]
-				
+
 				# Row 1 - Close prices
 				plt.subplot2grid((qtt_rows, qtt_elements), (0, plot_column), rowspan=1, colspan=1)
 				plt.title(stock["ticker"] + ': ' + format_value(online_data_current_rate) + ' ' + format_value(online_data_change) + ' (' + format_value(online_data_change_percentage) + '%)' )
@@ -220,16 +226,16 @@ while True:
 		current_yield_percentage = current_account_value * 100 / total_deposited
 		yield_after_inflation = current_yield_value - (total_deposited * inflation / 100)
 		yield_after_inflation_percentage = yield_after_inflation * 100 / total_deposited
-		
+
 		current_day_yield_value = current_shares_value - last_shares_value
 		current_day_yield_percentage = (current_shares_value * 100 / last_shares_value) - 100
-		
+
 		df_hist["Total"] = historical
 		df_hist["Diff"] = df_hist["Total"].diff()
 
 		logging.debug('SHARES TOTAL : ' + format_value(current_shares_value))
 		logging.debug('ACCOUNT TOTAL : ' + 	format_value(current_account_value) + ' ' + format_value(current_yield_value) + ' (' + format_value(current_yield_percentage) + '%)')
-		logging.debug("HISTORICAL")				
+		logging.debug("HISTORICAL")
 		logging.debug(df_hist)
 
 		# Row 3 - Historical and Intraday
@@ -261,7 +267,7 @@ while True:
 		online_ibvsp_change, online_ibvsp_change_percentage = calc_change(online_ibvsp_previous_close, online_ibvsp_current_rate)
 
 		plt.subplot2grid((qtt_rows, qtt_elements), (3, 0), rowspan=1, colspan=3)
-		plt.title('IBOVESPA ' + str(days) + ' days')
+		plt.title('IBOVESPA ' + str(period) + ' days')
 		ibvsp_today.plot(color=get_color(online_ibvsp_change))
 
 		intraday.append(current_account_value)
@@ -275,5 +281,3 @@ while True:
 
 	except Exception as e:
                 logging.error(e)
-
-

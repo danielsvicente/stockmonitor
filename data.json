@@ -1,6 +1,6 @@
 {
-	"total_deposited": 43600.00,
-	"available_to_invest": 1471.34,
+	"total_deposited": 45600.00,
+	"available_to_invest": 4289.30,
 	"inflation": 4.576,
 	"transactions":[
 		{
@@ -179,8 +179,25 @@
                         "trades": [
                                 {"type": "SELL", "ticker": "OIBR3", "yahoo_id": "OIBR3.SA", "quantity": 900, "price": 0.89}
                         ]
+                },
+		{
+                        "date": "30.01.2020",
+                        "total_trade": 1298.39,
+                        "total_after_fees": 1288.07,
+                        "trades": [
+				{"type": "BUY", "ticker": "WEGE3", "yahoo_id": "WEGE3.SA", "quantity": 100, "price": 40.99},
+                                {"type": "SELL", "ticker": "ABEV3", "yahoo_id": "ABEV3.SA", "quantity": 300, "price": 18.00}
+                        ]
+                },
+		{
+                        "date": "06.02.2020",
+                        "total_trade": -459.98,
+                        "total_after_fees": -470.33,
+                        "trades": [
+                                {"type": "BUY", "ticker": "MGLU3", "yahoo_id": "MGLU3.SA", "quantity": 100, "price": 56.56},
+                                {"type": "SELL", "ticker": "ABEV3", "yahoo_id": "ABEV3.SA", "quantity": 300, "price": 17.33}
+                        ]
                 }
-
 	],
 	"earnings": [
 		{"date": "17.07.2017", "value": 8.00, "type": "DIVIDEND", "ticker": "ABEV3", "shares": 50},
@@ -212,23 +229,23 @@
 		{"date": "13.03.2019", "value": 5.68, "type": "INTEREST", "ticker": "WEGE3", "shares": 130},
 		{"date": "18.03.2019", "value": 5.00, "type": "DIVIDEND", "ticker": "GOAU4", "shares": 100},
 		{"date": "05.04.2019", "value": 24.67, "type": "PROVENTS", "ticker": "MOVI3", "shares": 300},
-		{"data": "30.05.2019", "value": 4.00, "type": "DIVIDEND", "ticker": "GOAU4", "shares": 100},
-		{"data": "01.07.2019", "value": 10.00, "type": "DIVIDEND", "ticker": "ITSA4", "shares": 500},
-		{"data": "05.07.2019", "value": 36.82, "type": "INTEREST", "ticker": "MOVI3", "shares": 300},
-		{"data": "10.07.2019", "value": 51.82, "type": "INTEREST", "ticker": "MOVI3", "shares": 800},
-		{"data": "14.08.2019", "value": 29.40, "type": "DIVIDEND", "ticker": "WEGE3", "shares": 300},
-		{"data": "14.08.2019", "value": 13.02, "type": "INTEREST", "ticker": "WEGE3", "shares": 300},
-		{"data": "14.08.2019", "value": 12.03, "type": "INTEREST", "ticker": "WEGE3", "shares": 300},
-		{"data": "19.08.2019", "value": 47.78, "type": "INTEREST", "ticker": "TRPL4", "shares": 100},
-		{"data": "23.08.2019", "value": 170.25, "type": "DIVIDEND", "ticker": "ITSA4", "shares": 500},
-		{"data": "01.10.2019", "value": 10.00, "type": "DIVIDEND", "ticker": "ITSA4", "shares": 500},
-		{"data": "04.10.2019", "value": 2.55, "type": "INTEREST", "ticker": "POMO4", "shares": 100},
-		{"data": "10.10.2019", "value": 45.68, "type": "INTEREST", "ticker": "MOVI3", "shares": 800},
-		{"data": "03.12.2019", "value": 89.10, "type": "DIVIDEND", "ticker": "TRPL4", "shares": 200},
-		{"data": "03.12.2019", "value": 57.65, "type": "INTEREST", "ticker": "TRPL4", "shares": 200},
-		{"data": "30.12.2019", "value": 271.06, "type": "INTEREST", "ticker": "ABEV3", "shares": 650},
-		{"data": "02.01.2020", "value": 10.00, "type": "DIVIDEND", "ticker": "ITSA4", "shares": 500},
-		{"data": "06.01.2020", "value": 63.41, "type": "INTEREST", "ticker": "MOVI3", "shares": 800},
-		{"data": "20.01.2020", "value": 27.83, "type": "INTEREST", "ticker": "TRPL4", "shares": 200}
+		{"date": "30.05.2019", "value": 4.00, "type": "DIVIDEND", "ticker": "GOAU4", "shares": 100},
+		{"date": "01.07.2019", "value": 10.00, "type": "DIVIDEND", "ticker": "ITSA4", "shares": 500},
+		{"date": "05.07.2019", "value": 36.82, "type": "INTEREST", "ticker": "MOVI3", "shares": 300},
+		{"date": "10.07.2019", "value": 51.82, "type": "INTEREST", "ticker": "MOVI3", "shares": 800},
+		{"date": "14.08.2019", "value": 29.40, "type": "DIVIDEND", "ticker": "WEGE3", "shares": 300},
+		{"date": "14.08.2019", "value": 13.02, "type": "INTEREST", "ticker": "WEGE3", "shares": 300},
+		{"date": "14.08.2019", "value": 12.03, "type": "INTEREST", "ticker": "WEGE3", "shares": 300},
+		{"date": "19.08.2019", "value": 47.78, "type": "INTEREST", "ticker": "TRPL4", "shares": 100},
+		{"date": "23.08.2019", "value": 170.25, "type": "DIVIDEND", "ticker": "ITSA4", "shares": 500},
+		{"date": "01.10.2019", "value": 10.00, "type": "DIVIDEND", "ticker": "ITSA4", "shares": 500},
+		{"date": "04.10.2019", "value": 2.55, "type": "INTEREST", "ticker": "POMO4", "shares": 100},
+		{"date": "10.10.2019", "value": 45.68, "type": "INTEREST", "ticker": "MOVI3", "shares": 800},
+		{"date": "03.12.2019", "value": 89.10, "type": "DIVIDEND", "ticker": "TRPL4", "shares": 200},
+		{"date": "03.12.2019", "value": 57.65, "type": "INTEREST", "ticker": "TRPL4", "shares": 200},
+		{"date": "30.12.2019", "value": 271.06, "type": "INTEREST", "ticker": "ABEV3", "shares": 650},
+		{"date": "02.01.2020", "value": 10.00, "type": "DIVIDEND", "ticker": "ITSA4", "shares": 500},
+		{"date": "06.01.2020", "value": 63.41, "type": "INTEREST", "ticker": "MOVI3", "shares": 800},
+		{"date": "20.01.2020", "value": 27.83, "type": "INTEREST", "ticker": "TRPL4", "shares": 200}
 	]
 }
