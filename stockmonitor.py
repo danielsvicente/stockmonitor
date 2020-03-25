@@ -15,12 +15,12 @@ import argparse
 parser = argparse.ArgumentParser(description='Monitor for stock shares.')
 parser.add_argument('-v', '--verbose', action='store_true', help='print out all call outputs and debug logs')
 parser.add_argument('-p', '--period', default=30, help='number of days for stock history')
+parser.add_argument('-s', '--stats-only', action='store_true', help='display stats only')
 args = parser.parse_args()
 
 if args.verbose:
     logging.basicConfig(level=logging.DEBUG)
-    logging.debug('verbose=' + str(args.verbose))
-    logging.debug('period=' + str(args.period))
+    logging.debug(args)
 
 
 plt.style.use('dark_background')
@@ -76,11 +76,19 @@ for transaction in transactions:
 
 
 # Calculate total received from the companies to date
+earning_year = {}
 for item in earnings:
     dividends[item['ticker']]['dividend_count'] = dividends[item['ticker']]['dividend_count'] + 1
     dividends[item['ticker']]['dividend_total'] = dividends[item['ticker']]['dividend_total'] + item['value']
     dividends[item['ticker']]['dividend_per_share'] = dividends[item['ticker']]['dividend_per_share'] + (item['value'] / item['shares'])
     dividends[item['ticker']]['dividend_average'] = dividends[item['ticker']]['dividend_per_share'] / dividends[item['ticker']]['dividend_count']
+    # per year
+    year = item['date'][-4:]
+    if year in earning_year:
+        earning_year[year] = earning_year[year] + item['value']
+    else:
+        earning_year[year] = int(item['value'])
+    # total
     total_earning = total_earning + item['value']
 
 period = int(args.period)
@@ -106,9 +114,12 @@ def get_color(value):
     else:
         return 'grey'
 
+def calc_percentage(x, y):
+    return 100 * y / x;
 
 logging.debug(json.dumps(stocks, indent=4))
 logging.debug(json.dumps(dividends, indent=4))
+logging.debug(json.dumps(earning_year, indent=4))
 
 print('------------------------------------------------------------------------------------')
 print('                               SHARES AVERAGE PRICES                                ')
@@ -143,10 +154,14 @@ for stock in stocks:
 		format_value(dividends[stock['ticker']]['dividend_total']).rjust(10), \
 		format_value(dividends[stock['ticker']]['dividend_average']).rjust(10))
 
+print('\nPER YEAR:')
+for year, value in earning_year.items():
+    print(year, format_value(value).rjust(10))
+
 print('')
 print('TOTAL INVESTED: ', format_value(total_deposited).rjust(10))
 print('TOTAL TODAY   : ', format_value(total_money + available_to_invest).rjust(10))
-print('BALANCE       : ', format_value(total_money + available_to_invest - total_deposited).rjust(10))
+print('BALANCE       : ', format_value(total_money + available_to_invest - total_deposited).rjust(10), format_value(calc_percentage(total_deposited, total_money + available_to_invest - total_deposited)), '%')
 
 print('')
 print('TOTAL PAID FEES TO DATE: ', format_value(total_fees).rjust(10))
@@ -180,7 +195,15 @@ for stock in stocks:
         
         print(stock['ticker'], format_value(price_yield_2018).rjust(10), '%', format_value(price_yield_2019).rjust(10), '%', format_value(price_yield_2020).rjust(10), '%')
 
-while True:
+
+qtt_elements = 0
+qtt_rows = 4
+
+for stock in stocks:
+	if stock["quantity"] > 0:
+		qtt_elements = qtt_elements + 1
+
+while not args.stats_only:
 
 	try:
 
@@ -190,19 +213,12 @@ while True:
 		historical = pd.Series()
 		ibvsp_today = pd.Series()
 
-		plot_column = 0
-		qtt_elements = 0
-		qtt_rows = 4
-
 		plt.clf()
+		plot_column = 0
 
 		for stock in stocks:
 			if stock["quantity"] > 0:
-				qtt_elements = qtt_elements + 1
-
-		for stock in stocks:
-			if stock["quantity"] > 0:
-				logging.debug("Pulling", stock["yahoo_id"])
+				logging.debug("\n\n\ ############# Pulling " + str(stock["yahoo_id"]) + " #############")
 
 				online_data = web.get_data_yahoo(str(stock["yahoo_id"]), start, end)
 				logging.debug(online_data)
@@ -303,7 +319,7 @@ while True:
 		plt.title('IBOVESPA today: ' + format_value(online_ibvsp_change) + ' (' + format_value(online_ibvsp_change_percentage) + '%)' )
 		ibvsp_intraday_series.plot(color=get_color(online_ibvsp_change))
 
-		plt.pause(0.05)
+		plt.pause(0.10)
 		#time.sleep(0.1)
 
 	except Exception as e:

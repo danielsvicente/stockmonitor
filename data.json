@@ -1,6 +1,6 @@
 {
-	"total_deposited": 45600.00,
-	"available_to_invest": 4289.30,
+	"total_deposited": 55500.00,
+	"available_to_invest": 6569.20,
 	"inflation": 4.576,
 	"transactions":[
 		{
@@ -197,7 +197,51 @@
                                 {"type": "BUY", "ticker": "MGLU3", "yahoo_id": "MGLU3.SA", "quantity": 100, "price": 56.56},
                                 {"type": "SELL", "ticker": "ABEV3", "yahoo_id": "ABEV3.SA", "quantity": 300, "price": 17.33}
                         ]
-                }
+                },
+		{
+                        "date": "14.02.2020",
+                        "total_trade": 814.78,
+                        "total_after_fees": 812.27,
+                        "trades": [
+                                {"type": "SELL", "ticker": "ABEV3", "yahoo_id": "ABEV3.SA", "quantity": 50, "price": 16.30}
+                        ]
+                },
+		{
+                        "date": "27.02.2020",
+                        "total_trade": -4633.27,
+                        "total_after_fees": -4638.42,
+                        "trades": [
+                                {"type": "BUY", "ticker": "WEGE3", "yahoo_id": "WEGE3.SA", "quantity": 100, "price": 46.32}
+                        ]
+                },
+		{
+                        "date": "10.03.2020",
+                        "total_trade": -5201.30,
+                        "total_after_fees": -5208.94,
+                        "trades": [
+                                {"type": "BUY", "ticker": "TOTS3", "yahoo_id": "TOTS3.SA", "quantity": 44, "price": 60.80},
+				{"type": "BUY", "ticker": "TOTS3", "yahoo_id": "TOTS3.SA", "quantity": 6, "price": 60.78},
+				{"type": "BUY", "ticker": "TRPL4", "yahoo_id": "TRPL4.SA", "quantity": 100, "price": 21.60}
+                        ]
+                },
+		{
+                        "date": "16.03.2020",
+                        "total_trade": -4570.25,
+                        "total_after_fees": -4580.36,
+                        "trades": [
+                                {"type": "BUY", "ticker": "AZUL4", "yahoo_id": "AZUL4.SA", "quantity": 50, "price": 19.50},
+                                {"type": "BUY", "ticker": "BTOW3", "yahoo_id": "BTOW3.SA", "quantity": 50, "price": 53.70},
+                                {"type": "BUY", "ticker": "GOLL4", "yahoo_id": "GOLL4.SA", "quantity": 100, "price": 9.09}
+                        ]
+				},
+				{
+					"date": "20.03.2020",
+					"total_trade": 5700.00,
+					"total_after_fees": 5693.27,
+					"trades": [
+							{"type": "SELL", "ticker": "MOVI3", "yahoo_id": "MOVI3.SA", "quantity": 600, "price": 9.50}
+					]
+			}
 	],
 	"earnings": [
 		{"date": "17.07.2017", "value": 8.00, "type": "DIVIDEND", "ticker": "ABEV3", "shares": 50},
@@ -246,6 +290,13 @@
 		{"date": "30.12.2019", "value": 271.06, "type": "INTEREST", "ticker": "ABEV3", "shares": 650},
 		{"date": "02.01.2020", "value": 10.00, "type": "DIVIDEND", "ticker": "ITSA4", "shares": 500},
 		{"date": "06.01.2020", "value": 63.41, "type": "INTEREST", "ticker": "MOVI3", "shares": 800},
-		{"date": "20.01.2020", "value": 27.83, "type": "INTEREST", "ticker": "TRPL4", "shares": 200}
+		{"date": "20.01.2020", "value": 27.83, "type": "INTEREST", "ticker": "TRPL4", "shares": 200},
+		{"date": "06.03.2020", "value": 113.00, "type": "DIVIDEND", "ticker": "ITSA4", "shares": 500},
+		{"date": "06.03.2020", "value": 92.40, "type": "INTEREST", "ticker": "ITSA4", "shares": 500},
+		{"date": "06.03.2020", "value": 2.53, "type": "INTEREST", "ticker": "ITSA4", "shares": 500},
+		{"date": "11.03.2020", "value": 72.13, "type": "DIVIDENDS", "ticker": "WEGE3", "shares": 430},
+		{"date": "11.03.2020", "value": 11.47, "type": "INTEREST", "ticker": "WEGE3", "shares": 330},
+		{"date": "11.03.2020", "value": 10.72, "type": "INTEREST", "ticker": "WEGE3", "shares": 330},
+		{"date": "13.03.2020", "value": 0.05, "type": "RENTING", "ticker": "MOVI3", "shares": 400}
 	]
 }
