@@ -49,7 +49,7 @@
 			]
 		},
 		{
-			"date": null,
+			"date": "",
 			"total_trade": 0.00,
 			"total_after_fees": 0.00,
 			"trades": [

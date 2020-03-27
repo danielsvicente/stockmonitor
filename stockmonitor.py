@@ -12,6 +12,7 @@ import logging
 import inspect
 import argparse
 
+
 parser = argparse.ArgumentParser(description='Monitor for stock shares.')
 parser.add_argument('-v', '--verbose', action='store_true', help='print out all call outputs and debug logs')
 parser.add_argument('-p', '--period', default=30, help='number of days for stock history')
@@ -21,6 +22,62 @@ args = parser.parse_args()
 if args.verbose:
     logging.basicConfig(level=logging.DEBUG)
     logging.debug(args)
+
+#~~~~~~~~~~~~~~~~~~~~ Stock Class ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+
+"""
+Data module of Stock
+
+ticker:
+    quantity
+    total_invested
+    average_price
+    transactions[]:
+        date
+        type
+        quantity
+        price
+    earnings[]:
+        date
+        type
+        value
+        shares
+
+"""
+
+class Stock:
+
+    def __init__(self, ticker):
+        self.ticker = ticker
+        self.transactions = []
+        earnings = {}
+        self.quantity = 0
+        self.total_invested = 0.00
+        self.average_price = 0.00
+        logging.debug("New stock " + self.ticker)
+
+    def add_transaction(self, transaction):
+        logging.debug("Adding new transaction for " + self.ticker)
+        
+        self.transactions.append(transaction)
+        self.quantity += transaction['quantity']
+        self.total_invested += transaction['price'] * transaction['quantity']
+        self.average_price = self.total_invested / self.quantity
+
+        logging.debug("New transaction added. Updated figures:")
+        logging.debug(self.ticker)
+        logging.debug("Quantity      : " + str(self.quantity))
+        logging.debug("Total invested: " + str(self.total_invested))
+
+#~~~~~~~~~~~~~~~~~~~~ Stock Class ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+
+s = Stock('MOVI3')
+t = {"type": "BUY", "ticker": "AZUL4", "yahoo_id": "AZUL4.SA", "quantity": 50, "price": 19.50}
+t['date'] = '16.03.2020'
+s.add_transaction(t)
+t = {"type": "BUY", "ticker": "AZUL4", "yahoo_id": "AZUL4.SA", "quantity": 50, "price": 19.50}
+t['date'] = '16.03.2020'
+s.add_transaction(t)
 
 
 plt.style.use('dark_background')
